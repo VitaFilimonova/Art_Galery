@@ -1,0 +1,55 @@
+.button {
+  width: 41px;
+  height: 41px;
+  border: 1px solid #000;
+  border-right: none;
+  background: #FFF;
+}
+
+.button:hover {
+ transition: .4s ease-in-out;
+ background: #EDEDED;
+}
+
+
+
+.button_arrow {
+  display: flex;
+  width: 41px;
+  height: 41px;
+  border: 1px solid #000;
+  border-right: none;
+  background: #FFF;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_arrow:disabled {
+
+  background: green;
+
+}
+
+.button_active {
+  background-color: #000;
+  fill: #FFFFFF;
+}
+
+.button_img {
+  width: 13.453px;
+  height: 12.813px;
+  align-items: center;
+  justify-self: center;
+}
+
+.container {
+  display: flex;
+}
+
+.container .button_arrow:last-child {
+  border-right: 1px solid #000;
+  border-radius: 0 10px 10px 0;
+}
+.container .button_arrow:first-child {
+  border-radius: 10px 0 0 10px ;
+}

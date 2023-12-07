@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+.container {
+  //margin: 0 auto;
+  position: relative;
+  width: 265px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #FFF;
+  font-family: Roboto, serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  align-items: center;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 18px;
+  height: 45px;
+
+}
+
+.container__open {
+  border-radius: 8px 8px 0 0;
+  //border-bottom: 1px solid rgba(0, 0, 0, 0.30);
+
+}
+
+.value {
+
+}
+
+.buttons {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  width: 25px;
+
+}
+
+.clear_btn__hide {
+ visibility: hidden;
+}
+
+.carette {
+  background: white;
+  width: 10px;
+  height: 6px;
+cursor: pointer;
+  //border-top-color: rgba(0, 0, 0, 0.30);
+  //translate: 0 25%;
+  //border-width: 10px;
+  //border-height: 6px;
+  //border-style: solid ;
+  //viewBox: 0 0 10 6;
+  //fill: rgba(255, 255, 255, 0.30);
+  //opacity: transparent;
+
+}
+.carette_img {
+  width: 10px;
+  height: 6px;
+  z-index: 10;
+  transition: .3s ease-in-out ;
+}
+
+.carette_img__open {
+  rotate:  180deg ;
+  transition: .3s ease-in-out;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: calc(100% + 2px );
+  //border-radius: .25em;
+  top: calc(100%);
+max-height: 300px;
+  overflow-y: auto;
+  left: -1px;
+  z-index: 2;
+  background-color: #FFFFFF;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #000;
+  border-top: 1px solid rgba(0, 0, 0, 0.30);
+scrollbar-gutter: stable;
+}
+
+.options.show {
+  display: block;
+}
+
+.options::-webkit-scrollbar {
+//scrollbar-gutter: stable;
+  width: 9px;
+
+}
+
+.options::-webkit-scrollbar-thumb {
+  background: #7B7B7B;
+  border-radius: 10px;
+
+}
+
+.options::-webkit-scrollbar-track {
+  //background-color: transparent; /* Прозрачный цвет фона трека */
+}
+
+
+
+
+
+.option {
+  padding: 10px 22px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.option:hover {
+  background-color: black;
+  color: #FFFFFF;
+  transition: .6s ease-in-out;
+
+  position: initial;
+}
