@@ -2,7 +2,7 @@
   "name": "untitled4",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://VitaFilimonova.github.io/Art_Galery",
+  "homepage": "https://vitafilimonova.github.io/Art_Galery",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
