@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Art_Galery/static/css/main.602bb116.css",
+    "main.js": "/Art_Galery/static/js/main.ee2822fe.js",
+    "static/js/787.04836579.chunk.js": "/Art_Galery/static/js/787.04836579.chunk.js",
+    "static/media/logo.svg": "/Art_Galery/static/media/logo.538370ed8e451d2c5cdde122d22a0641.svg",
+    "static/media/theme_dark.svg": "/Art_Galery/static/media/theme_dark.4c98e07d31471a8532c84ef0060dafaa.svg",
+    "index.html": "/Art_Galery/index.html",
+    "static/media/doubleArrowL.svg": "/Art_Galery/static/media/doubleArrowL.356d88d77e234d1c61e46edf83e88556.svg",
+    "static/media/doubleArrowR.svg": "/Art_Galery/static/media/doubleArrowR.bc468006e53de7fb0ad17631b0415f79.svg",
+    "static/media/selectArrow.svg": "/Art_Galery/static/media/selectArrow.1ae316e8efe8b5fc4d9b73359b3ed2d5.svg",
+    "static/media/arrow_left.svg": "/Art_Galery/static/media/arrow_left.cd23a3815f9e419980d81ff394edaac6.svg",
+    "static/media/arrow_right.svg": "/Art_Galery/static/media/arrow_right.15a2398ae98f5be784df280a707b6d3b.svg",
+    "main.602bb116.css.map": "/Art_Galery/static/css/main.602bb116.css.map",
+    "main.ee2822fe.js.map": "/Art_Galery/static/js/main.ee2822fe.js.map",
+    "787.04836579.chunk.js.map": "/Art_Galery/static/js/787.04836579.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.602bb116.css",
+    "static/js/main.ee2822fe.js"
+  ]
+}
