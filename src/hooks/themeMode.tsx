@@ -1,31 +1,29 @@
-import {createContext, SetStateAction, useState} from "react";
-import {Dispatch} from "@reduxjs/toolkit";
-import {useAppDispatch} from "./redux";
-// const ThemeContext = createContext()
+import React, {createContext, SetStateAction, useState} from "react";
+import {useDispatch} from "react-redux";
 
-// type TypeSetState<T> = useDispat
+enum ThemeType {
+    Light = 1,
+    Dark,
+}
+
+const dispatch = useDispatch()
+type TypeSetState<ThemeType> = dispatch<SetStateAction<ThemeType>>;
 
 
+interface IThemes {
+    currentTheme: ThemeType;
+    setCurrentTheme: TypeSetState<ThemeType> | null;
+}
 
-// enum ThemeType {
-    // Light = 1,
-    // Dark,
-// }
-
-// type TypeSetState<T> = useAppDispatch<SetStateAction<ThemeType>>;
-
-// type Props = {
-    // children: React.ReactNode;
-// };
-
-// interface IContext {
-    // type: ThemeType;
-    // setType: TypeSetState<ThemeType> | null;
-// }
-
-// const ThemeContext = createContext<IContext>({type: ThemeType.Light, setType: null});
+const ThemeContext = createContext<IThemes>({currentTheme: ThemeType.Light, setCurrentTheme: null});
 
 // export const ThemeProvider: React.FC<Props> = ({children}) => {
-//     const [type, setType] = useState<ThemeType>(ThemeType.Light);
+export const ThemeProvider: React.FC = ({children}) => {
+    const [currentTheme, setCurrentTheme] = useState<ThemeType>(ThemeType.Light);
 
-    // return <ThemeContext.Provider value={{type, setType}}>{children}</ThemeContext.Provider>;
+    return (
+        <ThemeContext.Provider value={{currentTheme, setCurrentTheme}}>
+            {children}
+        </ThemeContext.Provider>
+    )
+}
