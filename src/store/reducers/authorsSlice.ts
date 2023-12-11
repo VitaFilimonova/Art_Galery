@@ -5,14 +5,12 @@ import {fetchAuthors} from "./ActionCreators";
 
 interface AuthorsState {
     authors: IAuthors[];
-    selectedAuthor: number;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: AuthorsState = {
     authors: [],
-    selectedAuthor: 0,
     isLoading: false,
     error: '',
 }
@@ -21,8 +19,9 @@ export const authorsSlice = createSlice({
     name: 'authors',
     initialState,
     reducers: {
-        authorFilter: (state,action: PayloadAction<number> ) => {
-state.selectedAuthor = action.payload
+        authorFilter: (state,action: PayloadAction<{authors: IAuthors[] } > ) => {
+//
+state.authors = action.payload.authors
     }},
     extraReducers: {
 

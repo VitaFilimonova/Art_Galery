@@ -7,37 +7,30 @@ import arrLeft from './../pictures/arrow_left.svg'
 import doubleArrRight from './../pictures/doubleArrowR.svg'
 import arrRight from './../pictures/arrow_right.svg'
 import {cardsApi, useGetPaintingsQuery} from "../services/CardsServise";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
 
-export interface IPages {
-    // totalPages: number;
-    limit: number;
-    // pages: number;
-    // currentPage: number
-}
 
-const MyPagination: React.FC<IPages> = ({limit}) => {
-
-    const {data} = useGetPaintingsQuery({})
-    const currentPage = useAppSelector(state => state.paginationReducer.currentPage);
-    const totalPages = useAppSelector(state => state.paginationReducer.totalPages);
+const MyPagination: React.FC = () => {
+    const limit = useAppSelector(state => state.paginationReducer.limit)
+    const {data} = useGetPaintingsQuery({limit})
+    const {currentPage, totalPages} = useAppSelector(state => state.paginationReducer);
+    const { nameFilter, authorFilter,locationFilter, startDateFilter, endDateFilter, activeFilter} = useAppSelector(state => state.paintingsReducer);
     const dispatch = useAppDispatch();
-    const paints = useAppSelector(state => state.paintingsReducer.paintings)
+    const {data: dataPagination} = cardsApi.useGetNameFilterQuery({locationId: locationFilter, authorId: authorFilter, name: nameFilter, startDate: startDateFilter, endDate: endDateFilter })
 
 
     useEffect(() => {
-        if (data) {
-            if (data.length !== paints.length) {
-                const pages = Math.ceil(data.length / limit)
+        if ( data) {
+            if (activeFilter && dataPagination) {
+                const pages = Math.ceil(dataPagination.length / limit)
                 dispatch(setTotalPages(pages))
-
-            } else {
-                const pages = Math.ceil(paints.length / limit)
+                dispatch(setCurrentPage(1))
+            }
+            else {
+                const pages = Math.ceil(data.length / limit)
                 dispatch(setTotalPages(pages))
             }
         }
-console.log(totalPages)
-    }, [data, limit, paints]);
+    }, [ data, limit, dataPagination]);
 
     // useEffect(() => {
     //     if (data && nameFilter != '') {
@@ -63,13 +56,14 @@ console.log(totalPages)
         }
     }
 
-    const pages = useMemo(() => {
-        const calculatedPages: number[] = [];
-        for (let i = 1; i <= totalPages; i++) {
-            calculatedPages.push(i);
-        }
-        return calculatedPages;
-    }, [totalPages]);
+    // const pages = useMemo(() => {
+    //     const calculatedPages: number[] = [];
+    //     for (let i = 1; i <= totalPages; i++) {
+    //         calculatedPages.push(i);
+    //     }
+    //     return calculatedPages;
+    // }, [totalPages]);
+    const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
     const visiblePages = useMemo(() => {
         const numVisiblePages = 3; // Number of visible page buttons

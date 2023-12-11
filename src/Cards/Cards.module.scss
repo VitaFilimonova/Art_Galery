@@ -39,13 +39,14 @@
   text-transform: capitalize;
   padding-left: 15px;
   padding-top: 5px;
+  transition: 1s ease-in-out;
   //transform: translateY(-140px);
   //display: grid;
 }
 
 .card_text:hover {
 transform: translateY(-120px);
-  transition: 1s linear , 1s ease-in;
+  transition: 1s linear , 1s ease-in-out;
 }
 
 .card_text__other {

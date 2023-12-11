@@ -7,11 +7,9 @@
 }
 
 .button:hover {
- transition: .4s ease-in-out;
+ transition: .3s ease-in-out;
  background: #EDEDED;
 }
-
-
 
 .button_arrow {
   display: flex;
@@ -24,15 +22,20 @@
   justify-content: center;
 }
 
-.button_arrow:disabled {
+.button_arrow:hover:not(:disabled) {
+  transition: .3s ease-in-out;
+  background: #EDEDED;
+}
 
-  background: green;
-
+.button_arrow:disabled .button_img {
+  filter: brightness(0.5) invert(0.5);
 }
 
 .button_active {
   background-color: #000;
-  fill: #FFFFFF;
+  color: #FFFFFF;
+
+
 }
 
 .button_img {

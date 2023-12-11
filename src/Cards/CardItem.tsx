@@ -1,11 +1,9 @@
 import React, {FC} from 'react';
 import classes from "./Cards.module.scss";
-import {IAuthors, ILocations, IPaintings} from "../models/IPaintings";
-import {cardsApi} from "../services/CardsServise";
+import { IPaintings} from "../models/IPaintings";
 
 interface CardItemProps {
     painting: IPaintings;
-    // name: any;
     author: any;
     location: any;
 }

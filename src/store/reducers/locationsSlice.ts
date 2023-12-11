@@ -5,7 +5,6 @@ import { fetchLocations} from "./ActionCreators";
 
 export interface LocationsState {
     locations: ILocations[];
-    selectedLocation: number;
     isLoading: boolean;
     error: string;
 }
@@ -13,7 +12,6 @@ export interface LocationsState {
 const initialState: LocationsState = {
     locations: [],
     isLoading: false,
-    selectedLocation: 0,
     error: '',
 }
 
@@ -21,9 +19,8 @@ export const locationsSlice = createSlice({
     name: 'locations',
     initialState,
     reducers: {
-
-        locationFilter: (state,action: PayloadAction<number>) => {
-            state.selectedLocation = action.payload
+        locationFilter: (state,action: PayloadAction<{locations: ILocations[] } >) => {
+            state.locations = action.payload.locations
         },
 
     },

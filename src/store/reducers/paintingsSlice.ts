@@ -8,32 +8,29 @@ export interface PaintingsState {
     paintings: IPaintings[];
     isLoading: boolean;
     error: string;
-    pages: object;
-    nameFilter?: string;
+    nameFilter?: string | undefined;
     authorFilter?: number | undefined;
     locationFilter?: number | undefined;
     startDateFilter?: string;
     endDateFilter?: string;
+    activeFilter?: boolean;
 }
 
 const initialState: PaintingsState = {
     paintings: [],
     isLoading: false,
     error: '',
-    pages: {},
-    nameFilter: '',
-    // startDateFilter: '',
-    // endDateFilter: ''
+    activeFilter: false,
+
 }
 
 export const paintingsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
-        filterAction: (state, action: PayloadAction<{ paintingsus?: IPaintings[], author?: number, name?: string, location?: number, startDate?: string, endDate?: string }>) => {
+        filterAction: (state, action: PayloadAction<{ paintingsus?: IPaintings[], author?: number, name?: string, location?: number, startDate?: string, endDate?: string, activeFilter?: boolean }>) => {
             if (action.payload.paintingsus !== undefined) {
                 state.paintings = action.payload.paintingsus;
-console.log(state.paintings.length)
             }
 
             // if (action.payload.author !== undefined) {
@@ -46,20 +43,26 @@ console.log(state.paintings.length)
                 // console.log('loca')
             // }
 
-            if (action.payload.name !== '' && action.payload.name !== undefined ) {
+            if (action.payload.name !== '' || action.payload.name !== undefined ) {
                 state.nameFilter = action.payload.name;
             }
             // if (action.payload.name !== '') {
             //     state.locationFilter = action.payload.location;
             // }
-            if (action.payload.startDate !== undefined && action.payload.startDate !== '') {
+            // if (action.payload.startDate !== undefined && action.payload.startDate !== '') {
                 state.startDateFilter = action.payload.startDate;
-            }
+            // }
 
-            if (action.payload.endDate !== undefined && action.payload.endDate !== '') {
+            // if (action.payload.endDate !== undefined && action.payload.endDate !== '') {
                 state.endDateFilter = action.payload.endDate;
-            }
+            // }
 
+            state.activeFilter =
+                state.authorFilter !== undefined ||
+                state.locationFilter !== undefined ||
+                state.nameFilter !== undefined ||
+                state.startDateFilter !== undefined ||
+                state.endDateFilter !== undefined;
 
         },
 

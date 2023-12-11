@@ -3,14 +3,15 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface PagesState {
-    currentPage: number;
-    totalPages: number;
-
+    currentPage: any ;
+    totalPages: number ;
+    limit: number;
 }
 
 const initialState: PagesState = {
     currentPage: 1,
     totalPages: 1,
+    limit: 5,
 }
 export const paginationSlice = createSlice({
     name: 'pagination',

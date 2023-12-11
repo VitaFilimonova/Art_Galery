@@ -1,7 +1,5 @@
  import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
- import {IAuthors, ILocations, IPaintings} from "../models/IPaintings";
- import {IPages} from "../Pagination/MyPagination";
-
+ import { IPaintings} from "../models/IPaintings";
 
 
 export const cardsApi = createApi({
@@ -15,19 +13,6 @@ export const cardsApi = createApi({
             query: ()   => ({
                 url: `/paintings`,
             }),
-        }),
-        getAuthors: build.query<IAuthors[], string>({
-            query: (authorId) => ({
-                url: '/authors',
-                params: {
-                    authorId: authorId
-                }
-            }),
-        }),
-        getLocations: build.query<ILocations[], string>({
-            query: () => ({
-                url: '/locations',
-            })
         }),
         getNameFilter: build.query<IPaintings[],{name?: string, authorId?: number, locationId?: number, startDate?: string, endDate?: string, limit?: number, page?: number}>({
             query: ({name = '', authorId, locationId, startDate, endDate, limit , page}) => ({
@@ -45,5 +30,5 @@ export const cardsApi = createApi({
         }),
     }),
 })
-//paintingsReducer.paintings
-export const { useGetPaintingsQuery, useGetAuthorsQuery, useGetLocationsQuery, useGetNameFilterQuery} = cardsApi
+
+export const { useGetPaintingsQuery, useGetNameFilterQuery} = cardsApi

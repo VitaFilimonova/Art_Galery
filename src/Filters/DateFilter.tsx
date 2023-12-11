@@ -5,17 +5,17 @@ import {useDispatch} from "react-redux";
 import {cardsApi} from "../services/CardsServise";
 import {useAppSelector} from "../hooks/redux";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
-import {IPages} from "../Pagination/MyPagination";
 
-const DateFilter: React.FC<IPages> = ({limit}) => {
+
+const DateFilter: React.FC= () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
     const [inputValueStart, setInputValueStart] = useState<string | undefined>(undefined);
     const [inputValueEnd, setInputValueEnd] = useState<string | undefined>(undefined);
     const  dispatch = useDispatch()
-    const {currentPage} = useAppSelector(state => state.paginationReducer)
+    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
     const {nameFilter, authorFilter,  locationFilter} = useAppSelector(state => state.paintingsReducer)
-    const {data} =  cardsApi.useGetNameFilterQuery({ name:nameFilter, authorId: authorFilter, locationId: locationFilter, startDate: inputValueStart, endDate: inputValueEnd, page: currentPage, limit})
+    const {data} =  cardsApi.useGetNameFilterQuery({ name:nameFilter, authorId: authorFilter, locationId: locationFilter, startDate: inputValueStart, endDate: inputValueEnd, page: currentPage, limit: limit})
 
     useEffect(() => {
 
@@ -27,35 +27,47 @@ const DateFilter: React.FC<IPages> = ({limit}) => {
                 location: locationFilter,
                 startDate: inputValueStart,
                 endDate: inputValueEnd}))
-
         }
     }, [ data, authorFilter, nameFilter, locationFilter, inputValueStart, inputValueEnd]);
 
-    const dataSetStart = (start: string ) => {
-        setInputValueStart(start)
-        if ( inputValueEnd !== undefined) {
-            if (+inputValueEnd < +start) {
-                setError(true);
-            } else {
-                setError(false);
 
-            }
-    }}
-    const dataSetEnd = ( end: string) => {
-        setInputValueEnd(end)
-        if (inputValueStart !== undefined) {
-            if (+end < +inputValueStart) {
-                setError(true);
-            } else {
-                setError(false);
+    const dataSetStart = (start: string | undefined) => {
 
+        if ( start && start.length == 4) {
+            setInputValueStart(start)
+            setError(false)
+            checkError()
+        } else {
+            setInputValueStart(undefined)
+            setError(true)
+        }
+
+    }
+    const dataSetEnd = ( end: string | undefined) => {
+
+        if ( end && end.length == 4) {
+            setInputValueEnd(end)
+            setError(false)
+            checkError()
+
+        } else {
+            setInputValueEnd(undefined)
+            setError(true)
+
+        }
+
+    }
+
+    const checkError =( ) => {
+        if ( inputValueStart != undefined && inputValueEnd != undefined) {
+            console.log('spsps')
+            if (+ inputValueStart > +inputValueEnd) {
+                setError(true)
             }
         }
 
     }
 
-    // const {dates} = useAppSelector(state => state.dateReducer)
-    // console.log(data)
     return (
         <div  className={`${classes.container} ${isOpen ? classes.container__open : ''}`}
               // onBlur={()=> setIsOpen(false)}
@@ -71,14 +83,15 @@ const DateFilter: React.FC<IPages> = ({limit}) => {
             </div>
 
             <div className={`${classes.options} ${isOpen ? classes.show : ''}`}>
+                <div className={classes.text}>Write a 4-digit date number</div>
                 <div className={classes.inputs}>
                     <input id={'start'}
-                           // type='text'
+                        // type='text'
                            placeholder={'from'}
                            className={classes.input}
                            value={inputValueStart}
-                          onClick={(event) => event.stopPropagation()}
-                           onChange={(event)=> dataSetStart(event.target.value)}
+                           onClick={(event) => event.stopPropagation()}
+                           onChange={(event) => dataSetStart(event.target.value)}
                     >
                     </input>
                     <span className={classes.line}></span>
@@ -87,19 +100,14 @@ const DateFilter: React.FC<IPages> = ({limit}) => {
                            className={classes.input}
                            value={inputValueEnd}
                            onClick={(event) => event.stopPropagation()}
-                           onChange={(event)=> dataSetEnd(event.target.value)}
+                           onChange={(event) => dataSetEnd(event.target.value)}
                     >
                     </input>
                 </div>
-                 <div className={`${classes.error} ${error ? classes.error_show : ''}`}>
-                     Please write the end date later than the start date
-                 </div>
+                <div className={`${classes.error} ${error ? classes.error_show : ''}`}>
+                    Please write the end date later than the start date or check data length
+                </div>
 
-
-                {/*{authors?.map((author) =>*/}
-                {/*    <li value={author.id} key={author.id} className={classes.option}*/}
-                {/*        onClick={() => handleOptionClick(author.id, author.name)}> {author.name} </li>)*/}
-                {/*}*/}
             </div>
         </div>
     );

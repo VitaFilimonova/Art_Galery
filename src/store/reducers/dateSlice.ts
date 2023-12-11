@@ -34,23 +34,6 @@ export const dateSlice = createSlice({
 
 
         }},
-    extraReducers: {
-
-        // [fetchAuthors.fulfilled.type]: (state, action: PayloadAction<IAuthors[]>) => {
-        //
-        //     state.isLoading = false;
-        //     state.error = '';
-        //     state.dates = action.payload;
-        // } ,
-        // [fetchAuthors.pending.type]: (state) => {
-        //     state.isLoading = true;
-        // },
-        // [fetchAuthors.rejected.type]: (state, action: PayloadAction<string>) => {
-        //     state.isLoading = false;
-        //     state.error = action.payload;
-        // },
-
-    }
 })
 
 export default dateSlice.reducer

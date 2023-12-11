@@ -4,16 +4,16 @@ import classes from "./Filters.module.scss";
 import DateFilter from "./DateFilter";
 import AuthorFilter from "./AuthorFilter";
 import LocationFilter from "./LocationFilter";
-import {IPages} from "../Pagination/MyPagination";
 
 
-const Filters :React.FC<IPages> = ({limit}) => {
+
+const Filters :React.FC = () => {
     return (
         <div className={classes.filters}>
-            <NameFilter limit={limit}/>
-            <AuthorFilter limit={limit}/>
-            <LocationFilter limit={limit}/>
-            <DateFilter limit={limit}/>
+            <NameFilter />
+            <AuthorFilter />
+            <LocationFilter/>
+            <DateFilter />
         </div>
     );
 };

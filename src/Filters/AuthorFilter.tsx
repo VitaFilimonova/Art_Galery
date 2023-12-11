@@ -4,33 +4,19 @@ import {useDispatch} from "react-redux";
 import {cardsApi} from "../services/CardsServise";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import {useAppSelector} from "../hooks/redux";
-// import arrow from "./arrowSelect.svg";
 import arrow from "./../pictures/selectArrow.svg";
-import {IPages} from "../Pagination/MyPagination";
-//
-// type SelectOption = {
-//     value: string
-//     themeWhite: boolean
-// }
-//
-// type SelectProps = {
-//     options: SelectOption[]
-//     value?: SelectOption
-//     onChange: ((value: SelectOption | undefined) => void) | any
-// }
 
-
-const AuthorFilter: React.FC<IPages> = ({limit}) => {
+const AuthorFilter: React.FC = () => {
     const [authorFilter, setAuthorFilter] = useState<number | undefined>(undefined)
     const [authorFilterName, setAuthorFilterName] = useState<string | undefined>(undefined)
     const  dispatch = useDispatch()
     const {nameFilter, locationFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage} = useAppSelector(state => state.paginationReducer)
-    const {data} =  cardsApi.useGetNameFilterQuery({ name:nameFilter, authorId: authorFilter, locationId: locationFilter, page: currentPage})
-    const {authors, selectedAuthor} = useAppSelector(state => state.authorsReducer)
+    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
+    const {data} =  cardsApi.useGetNameFilterQuery({ name:nameFilter, authorId: authorFilter, locationId: locationFilter, page: currentPage, limit: limit})
+    const {authors} = useAppSelector(state => state.authorsReducer)
     useEffect(() => {
 
-        if (data ) {
+        if (data) {
             dispatch(paintingsSlice.actions.filterAction({
                 paintingsus: data,
                 name: nameFilter,
@@ -80,17 +66,10 @@ onBlur={()=> setIsOpen(false)}
             </div>
 
             <ul className={`${classes.options} ${isOpen? classes.show : ''}`} >
-                {/*<option className={classes.select_opt} selected={true} ></option>*/}
                 { authors?.map((author) =>
                     <li value={author.id}  key={author.id} className={classes.option} onClick = {() => handleOptionClick(author.id, author.name)} > {author.name} </li>)
                 }
             </ul>
-            {/*<select onChange={event => setAuthorFilter(+event.target.value)} >*/}
-            {/*    <option className={classes.select_opt} selected={true} placeholder={'Author'}></option>*/}
-            {/*    { authors?.map((author) =>*/}
-            {/*        <option value={author.id}  key={author.id}> {author.name} </option>)*/}
-            {/*    }*/}
-            {/*</select>*/}
 
         </div>
     );
