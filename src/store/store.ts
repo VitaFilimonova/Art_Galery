@@ -4,8 +4,8 @@ import {paintingsSlice} from "./reducers/paintingsSlice";
 import {locationsSlice} from "./reducers/locationsSlice";
 import {authorsSlice} from "./reducers/authorsSlice";
 import {paginationSlice} from "./reducers/paginationSlice";
-import {filterSlice} from "./reducers/filtersSlice";
 import {dateSlice} from "./reducers/dateSlice";
+import {themeSlice} from "./reducers/themeSlice";
 
 
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
         authorsReducer:authorsSlice.reducer,
         locationsReducer:locationsSlice.reducer,
         paginationReducer: paginationSlice.reducer,
-        filterReducer: filterSlice.reducer,
+        themeReducer: themeSlice.reducer,
         dateReducer: dateSlice.reducer
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(cardsApi.middleware)

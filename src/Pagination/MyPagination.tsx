@@ -32,21 +32,6 @@ const MyPagination: React.FC = () => {
         }
     }, [ data, limit, dataPagination]);
 
-    // useEffect(() => {
-    //     if (data && nameFilter != '') {
-    //         // authorFilter ?
-    //         dispatch(paintingsSlice.actions.filterAction( {
-    //             paintingsus: data,
-    //             author: authorFilter,
-    //             location: locationFilter,
-    //             name: nameFilter
-    //
-    //         }))
-    //         // :  dispatch(paintingsSlice.actions.filterAction( {paintingsus: data}))
-    //     }
-    //     console.log('nameFil')
-    // }, [data, authorFilter, nameFilter, locationFilter]);
-
 
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
@@ -56,14 +41,6 @@ const MyPagination: React.FC = () => {
         }
     }
 
-    // const pages = useMemo(() => {
-    //     const calculatedPages: number[] = [];
-    //     for (let i = 1; i <= totalPages; i++) {
-    //         calculatedPages.push(i);
-    //     }
-    //     return calculatedPages;
-    // }, [totalPages]);
-    const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
     const visiblePages = useMemo(() => {
         const numVisiblePages = 3; // Number of visible page buttons
@@ -95,18 +72,6 @@ const MyPagination: React.FC = () => {
                         disabled={currentPage === 1}>
                     <img src={arrLeft} className={classes.button_img}/>
                 </button>
-
-
-                {/*{pages.map((page) => (*/}
-                {/*    <button*/}
-                {/*        key={page}*/}
-                {/*        className={`${classes.button} ${currentPage === page ? classes.button_active : ''}`}*/}
-                {/*        onClick={() => handlePageChange(page)}*/}
-                {/*        disabled={currentPage === page}*/}
-                {/*    >*/}
-                {/*        {page}*/}
-                {/*    </button>))}*/}
-
 
                 {visiblePages.map((page) => (
                     <button
