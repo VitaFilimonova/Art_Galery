@@ -5,17 +5,27 @@ import {useAppSelector} from "../hooks/redux";
 import {cardsApi} from "../services/CardsServise";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import arrow from "../pictures/selectArrow.svg";
+import useTheme from "../hooks/useTheme";
+
 
 
 const LocationFilter: React.FC = () => {
     const [locationFilter, setLocationFilter] = useState<number | undefined>(undefined)
     const [locationFilterName, setLocationFilterName] = useState<string | undefined>(undefined)
-    const dispatch = useDispatch()
-    const {nameFilter, authorFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({name: nameFilter, authorId: authorFilter, locationId: locationFilter, page: currentPage, limit: limit})
-
     const [isOpen, setIsOpen] = useState(false)
+
+
+    const dispatch = useDispatch()
+    const {nameFilter, authorFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsReducer)
+    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
+    const {data} = cardsApi.useGetNameFilterQuery({
+        name: nameFilter,
+        authorId: authorFilter,
+        locationId: locationFilter,
+        startDate: startDateFilter, endDate: endDateFilter,
+        page: currentPage,
+        limit: limit
+    })
 
     useEffect(() => {
 
@@ -30,7 +40,7 @@ const LocationFilter: React.FC = () => {
     }, [data, authorFilter, nameFilter, locationFilter]);
 
     const {locations} = useAppSelector(state => state.locationsReducer)
-
+    const {darkMode} = useTheme()
 
     const handleOptionClick = (locationId: number, locationName: string) => {
 
@@ -39,24 +49,22 @@ const LocationFilter: React.FC = () => {
 
     }
     const clearLocationFilter = () => {
+
         setLocationFilter(undefined)
         setLocationFilterName(undefined)
 
     }
 
     return (
-        //     <option className={classes.select_opt} >Location</option>
-        //     { locations?.map((location) =>
-        //         <option value={location.id}  key={location.id}> {location.location} </option>)
-        //     }
 
-        <div className={`${classes.container} ${isOpen ? classes.container__open : ''}`}
+        <div className={`${classes.container} ${isOpen ? classes.container_open : ''} ${darkMode ? classes.container_dark : ''}`}
              onBlur={() => setIsOpen(false)}
              tabIndex={0}
              onClick={() => setIsOpen(prevState => !prevState)}>
 
             <span className={classes.name}>{locationFilterName ? locationFilterName : 'Location'}</span>
-            <div className={classes.buttons}>
+
+            <div className={classes.container__buttons}>
 
                 <button
                     className={`${classes.clear_btn} ${locationFilterName == undefined ? classes.clear_btn__hide : ''}`}
@@ -67,16 +75,14 @@ const LocationFilter: React.FC = () => {
                 >
                     &times;</button>
 
-
-                <div className={classes.carette}>
-                    <img src={arrow} className={`${classes.carette_img} ${isOpen ? classes.carette_img__open : ''}`}/>
+                <div className={classes.container__arrow}>
+                    <img src={arrow}  className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>
                 </div>
             </div>
 
-            <ul className={`${classes.options} ${isOpen ? classes.show : ''}`}>
-                {/*<option className={classes.select_opt} selected={true} ></option>*/}
+            <ul className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 {locations?.map((location) =>
-                    <li value={location.id} key={location.id} className={classes.option}
+                    <li value={location.id} key={location.id} className={`${classes.option}  ${darkMode ? classes.option_dark : ''}`}
                         onClick={() => handleOptionClick(location.id, location.location)}> {location.location} </li>)
                 }
             </ul>

@@ -1,8 +1,8 @@
-// import {getPaintingsData} from "../API/CardsServiceAPI";
 import React from "react";
 import classes from "./Cards.module.scss";
 import CardItem from "./CardItem";
-import {useAppDispatch, useAppSelector} from "../hooks/redux";
+import { useAppSelector} from "../hooks/redux";
+import useTheme from "../hooks/useTheme";
 
 
 const Cards = () => {
@@ -10,16 +10,15 @@ const Cards = () => {
     const {authors} = useAppSelector(state => state.authorsReducer)
     const {locations} = useAppSelector(state => state.locationsReducer)
     const {paintings: cards} = useAppSelector(state => state.paintingsReducer)
-    const dispatch = useAppDispatch()
+    const { darkMode } = useTheme();
 
     return (
         <div className={classes.cards}>
-            {cards.length === 0? <div className={classes.results}>No results </div> :
+            {cards.length === 0 ? <div className={`${classes.cards__results} ${darkMode? classes.cards__results_dark : '' }`}>No results </div> :
                 cards?.map((painting) =>
                     <CardItem painting={painting}
                               author={authors && authors.find((author) => author.id === painting.authorId)}
-                              location={ locations && locations.find((location) => location.id === painting.locationId)}
-                        // date={ locations && locations.find((location) => location.id === painting.locationId)}
+                              location={locations && locations.find((location) => location.id === painting.locationId)}
                               key={painting.id}/>)
             }
         </div>

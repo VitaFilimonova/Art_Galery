@@ -5,15 +5,13 @@ import DateFilter from "./DateFilter";
 import AuthorFilter from "./AuthorFilter";
 import LocationFilter from "./LocationFilter";
 
-
-
-const Filters :React.FC = () => {
+const Filters: React.FC = () => {
     return (
         <div className={classes.filters}>
-            <NameFilter />
-            <AuthorFilter />
+            <NameFilter/>
+            <AuthorFilter/>
             <LocationFilter/>
-            <DateFilter />
+            <DateFilter/>
         </div>
     );
 };

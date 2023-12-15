@@ -21,41 +21,34 @@ const initialState: PaintingsState = {
     isLoading: false,
     error: '',
     activeFilter: false,
-
 }
 
 export const paintingsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
-        filterAction: (state, action: PayloadAction<{ paintingsus?: IPaintings[], author?: number, name?: string, location?: number, startDate?: string, endDate?: string, activeFilter?: boolean }>) => {
+        filterAction: (state, action: PayloadAction<{
+            paintingsus?: IPaintings[],
+            author?: number,
+            name?: string,
+            location?: number,
+            startDate?: string,
+            endDate?: string,
+            activeFilter?: boolean
+        }>) => {
             if (action.payload.paintingsus !== undefined) {
                 state.paintings = action.payload.paintingsus;
             }
 
-            // if (action.payload.author !== undefined) {
-                state.authorFilter = action.payload.author;
-                // console.log('auth')
-            // }
+            state.authorFilter = action.payload.author;
+            state.locationFilter = action.payload.location;
 
-            // if (action.payload.location !== undefined ) {
-                state.locationFilter = action.payload.location;
-                // console.log('loca')
-            // }
-
-            if (action.payload.name !== '' || action.payload.name !== undefined ) {
+            if (action.payload.name !== '' || action.payload.name !== undefined) {
                 state.nameFilter = action.payload.name;
             }
-            // if (action.payload.name !== '') {
-            //     state.locationFilter = action.payload.location;
-            // }
-            // if (action.payload.startDate !== undefined && action.payload.startDate !== '') {
-                state.startDateFilter = action.payload.startDate;
-            // }
 
-            // if (action.payload.endDate !== undefined && action.payload.endDate !== '') {
-                state.endDateFilter = action.payload.endDate;
-            // }
+            state.startDateFilter = action.payload.startDate;
+            state.endDateFilter = action.payload.endDate;
 
             state.activeFilter =
                 state.authorFilter !== undefined ||
@@ -63,13 +56,11 @@ export const paintingsSlice = createSlice({
                 state.nameFilter !== undefined ||
                 state.startDateFilter !== undefined ||
                 state.endDateFilter !== undefined;
-
         },
 
     },
     extraReducers: {
         [fetchPaintings.fulfilled.type]: (state, action: PayloadAction<IPaintings[]>) => {
-
             state.isLoading = false;
             state.error = '';
             state.paintings = action.payload;

@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type {PayloadAction} from '@reduxjs/toolkit'
 
 
 export interface PagesState {
-    currentPage: any ;
-    totalPages: number ;
+    currentPage: any;
+    totalPages: number;
     limit: number;
 }
 
@@ -26,5 +26,5 @@ export const paginationSlice = createSlice({
     },
 });
 
- export const { setCurrentPage, setTotalPages } = paginationSlice.actions;
+export const {setCurrentPage, setTotalPages} = paginationSlice.actions;
 export default paginationSlice.reducer

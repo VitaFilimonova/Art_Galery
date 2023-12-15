@@ -1,9 +1,3 @@
-export interface All {
-    paintings: IPaintings;
-    authors: IAuthors;
-    locations: ILocations;
-    dates: IDates;
-}
 export interface IPaintings {
     authorId: number;
     created: string;

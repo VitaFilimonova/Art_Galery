@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import './App.css';
+import './App.scss';
 import './reset.scss';
 import Cards from "./Cards/Cards";
 import Header from "./Header/Header";
 import Filters from "./Filters/Filters";
-import {useAppDispatch} from "./hooks/redux";
+import {useAppDispatch, useAppSelector} from "./hooks/redux";
 import {fetchAllCards} from "./store/reducers/ActionCreatorsAll";
-import MyPagination from "./Pagination/MyPagination";
+import Pagination from "./Pagination/Pagination";
 
 
 function App() {
@@ -15,17 +15,16 @@ function App() {
         dispatch(fetchAllCards());
     }, []);
 
+    const { darkMode } = useAppSelector(state => state.themeReducer);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-          <Header/>
-      </header>
-        <Filters />
-        <Cards/>
-        <MyPagination />
-    </div>
-  );
+    return (
+        <div className={'App'}>
+            <Header/>
+            <Filters/>
+            <Cards/>
+            <Pagination/>
+        </div>
+    );
 }
 
 export default App;

@@ -1,138 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@use "./../App";
+@use "src/Cards/Cards.module";
+@forward "./../Cards/Cards.module";
 
-.container {
-  //margin: 0 auto;
-  position: relative;
+ .container {
   width: 265px;
+  height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   box-sizing: border-box;
   border: 1px solid #000;
   border-radius: 8px;
-  background: #FFF;
-  font-family: Roboto, serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
+  background: App.$global-white;
+
+  @include Cards.font($font-size: 13px, $font-weight: 400);
   line-height: normal;
-  align-items: center;
+
   padding-left: 15px;
-  display: flex;
-  justify-content: space-between;
   padding-right: 18px;
-  height: 45px;
+  cursor: default;
 
+  &_open {
+    border-radius: 8px 8px 0 0;
+  }
+
+  &_dark {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    border-color: App.$global-white;
+  }
 }
 
-.container__open {
-  border-radius: 8px 8px 0 0;
-  //border-bottom: 1px solid rgba(0, 0, 0, 0.30);
 
-}
-
-.value {
-
-}
-
-.buttons {
+.container__buttons {
   align-items: center;
   justify-content: space-between;
   display: flex;
   width: 25px;
-
 }
 
 .clear_btn__hide {
- visibility: hidden;
+  visibility: hidden;
 }
 
-.carette {
-  background: white;
+.container__arrow {
+  background: App.$global-white;
   width: 10px;
   height: 6px;
-cursor: pointer;
-  //border-top-color: rgba(0, 0, 0, 0.30);
-  //translate: 0 25%;
-  //border-width: 10px;
-  //border-height: 6px;
-  //border-style: solid ;
-  //viewBox: 0 0 10 6;
-  //fill: rgba(255, 255, 255, 0.30);
-  //opacity: transparent;
+  cursor: pointer;
 
-}
-.carette_img {
-  width: 10px;
-  height: 6px;
-  z-index: 10;
-  transition: .3s ease-in-out ;
+  &_img {
+    width: 10px;
+    height: 6px;
+    z-index: 10;
+    transition: .3s ease-in-out;
+  }
+
+  &_img__open {
+    rotate: 180deg;
+    transition: .3s ease-in-out;
+  }
 }
 
-.carette_img__open {
-  rotate:  180deg ;
-  transition: .3s ease-in-out;
-}
 
 .options {
+  width: calc(100% + 2px);
+  max-height: 300px;
   display: none;
   position: absolute;
+
+  list-style: none;
+  overflow-y: auto;
+  z-index: 2;
+
+  background-color: App.$global-white;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid App.$global-black;
+  border-top: 1px solid rgba(App.$global-black, 0.30);
+
+  top: calc(100%);
+  left: -1px;
   margin: 0;
   padding: 0;
-  list-style: none;
-  width: calc(100% + 2px );
-  //border-radius: .25em;
-  top: calc(100%);
-max-height: 300px;
-  overflow-y: auto;
-  left: -1px;
-  z-index: 2;
-  background-color: #FFFFFF;
-  border-radius: 0 0 8px 8px;
-  border: 1px solid #000;
-  border-top: 1px solid rgba(0, 0, 0, 0.30);
-scrollbar-gutter: stable;
+  scrollbar-gutter: stable;
+
+  &_open {
+    display: block;
+  }
+
+  &_dark {
+    border: 1px solid App.$global-white;
+    background-color: App.$global-black;
+
+  }
+
+  &::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #7B7B7B;
+    border-radius: 10px;
+  }
 }
-
-.options.show {
-  display: block;
-}
-
-.options::-webkit-scrollbar {
-//scrollbar-gutter: stable;
-  width: 9px;
-
-}
-
-.options::-webkit-scrollbar-thumb {
-  background: #7B7B7B;
-  border-radius: 10px;
-
-}
-
-.options::-webkit-scrollbar-track {
-  //background-color: transparent; /* Прозрачный цвет фона трека */
-}
-
-
-
 
 
 .option {
-  padding: 10px 22px;
-  cursor: pointer;
   align-items: center;
   justify-content: center;
-  color: #000;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
+  color: App.$global-black;
+  @include Cards.font($font-size: 16px, $font-weight: 500);
   line-height: 20px;
-}
+  padding: 10px 22px;
+  cursor: pointer;
 
-.option:hover {
-  background-color: black;
-  color: #FFFFFF;
-  transition: .6s ease-in-out;
+  &_dark {
+    color: App.$global-white;
+    background-color: App.$global-black;
+  }
+  &_dark:hover {
+    background-color: App.$global-white;
+    color: App.$global-black;
+    transition: .6s ease-in-out;
+    position: initial;
+  }
 
-  position: initial;
+
+  &:hover {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    transition: .6s ease-in-out;
+    position: initial;
+  }
 }

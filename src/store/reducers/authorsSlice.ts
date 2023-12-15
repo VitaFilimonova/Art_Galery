@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import type {PayloadAction} from '@reduxjs/toolkit'
 import {IAuthors} from "../../models/IPaintings";
 import {fetchAuthors} from "./ActionCreators";
 
@@ -19,10 +19,10 @@ export const authorsSlice = createSlice({
     name: 'authors',
     initialState,
     reducers: {
-        authorFilter: (state,action: PayloadAction<{authors: IAuthors[] } > ) => {
-//
-state.authors = action.payload.authors
-    }},
+        authorFilter: (state, action: PayloadAction<{ authors: IAuthors[] }>) => {
+            state.authors = action.payload.authors
+        }
+    },
     extraReducers: {
 
         [fetchAuthors.fulfilled.type]: (state, action: PayloadAction<IAuthors[]>) => {
@@ -30,7 +30,7 @@ state.authors = action.payload.authors
             state.isLoading = false;
             state.error = '';
             state.authors = action.payload;
-        } ,
+        },
         [fetchAuthors.pending.type]: (state) => {
             state.isLoading = true;
         },
@@ -41,5 +41,4 @@ state.authors = action.payload.authors
 
     }
 })
-
 export default authorsSlice.reducer

@@ -15,13 +15,12 @@ const CardItem: FC<CardItemProps> = ({painting, author, location}) => {
     return (
         <div className={classes.card}>
             <img src={'https://test-front.framework.team' + `${painting.imageUrl}`} alt='picture'/>
-            <div className={classes.card_text}>
+            <div className={classes.description}>
                 {painting.name}
-                <div className={classes.card_text__other}>
-                    <div className={classes.card_description} data-label="Author: "> {author.name}</div>
-                    <div className={classes.card_description} data-label="Created: ">  {painting.created}</div>
-                        <div className={classes.card_description} data-label="Location: "> {location.location}</div>
-
+                <div className={classes.description__text}>
+                    <div className={classes.description__text_elem} data-label="Author: "> {author.name}</div>
+                    <div className={classes.description__text_elem} data-label="Created: ">  {painting.created}</div>
+                        <div className={classes.description__text_elem} data-label="Location: "> {location.location}</div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { ILocations} from "../../models/IPaintings";
-import { fetchLocations} from "./ActionCreators";
+import type {PayloadAction} from '@reduxjs/toolkit'
+import {ILocations} from "../../models/IPaintings";
+import {fetchLocations} from "./ActionCreators";
 
 export interface LocationsState {
     locations: ILocations[];
@@ -19,7 +19,7 @@ export const locationsSlice = createSlice({
     name: 'locations',
     initialState,
     reducers: {
-        locationFilter: (state,action: PayloadAction<{locations: ILocations[] } >) => {
+        locationFilter: (state, action: PayloadAction<{ locations: ILocations[] }>) => {
             state.locations = action.payload.locations
         },
 
@@ -30,7 +30,7 @@ export const locationsSlice = createSlice({
             state.isLoading = false;
             state.error = '';
             state.locations = action.payload;
-        } ,
+        },
         [fetchLocations.pending.type]: (state) => {
             state.isLoading = true;
         },

@@ -1,3 +1,9 @@
+
+
+.container {
+  display: flex;
+}
+
 .button {
   width: 41px;
   height: 41px;
@@ -45,9 +51,7 @@
   justify-self: center;
 }
 
-.container {
-  display: flex;
-}
+
 
 .container .button_arrow:last-child {
   border-right: 1px solid #000;
