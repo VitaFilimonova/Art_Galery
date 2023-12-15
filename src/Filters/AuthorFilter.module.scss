@@ -28,41 +28,43 @@
 
   &_dark {
     background-color: App.$global-black;
+    //background-color: #0C0C0A;
     color: App.$global-white;
     border-color: App.$global-white;
   }
 }
 
 
-.container__buttons {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 25px;
-}
-
-.clear_btn__hide {
-  visibility: hidden;
-}
-
-.container__arrow {
-  background: App.$global-white;
-  width: 10px;
-  height: 6px;
-  cursor: pointer;
-
-  &_img {
-    width: 10px;
-    height: 6px;
-    z-index: 10;
-    transition: .3s ease-in-out;
-  }
-
-  &_img__open {
-    rotate: 180deg;
-    transition: .3s ease-in-out;
-  }
-}
+//.container__buttons {
+//  align-items: center;
+//  justify-content: space-between;
+//  display: flex;
+//  width: 25px;
+//  z-index: 5;
+//}
+//
+//.clear_btn__hide {
+//  visibility: hidden;
+//}
+//
+//.container__arrow {
+//  //background: App.$global-white;
+//  width: 10px;
+//  height: 6px;
+//  cursor: pointer;
+//
+//  &_img {
+//    width: 10px;
+//    height: 6px;
+//
+//    transition: .3s ease-in-out;
+//  }
+//
+//  &_img__open {
+//    rotate: 180deg;
+//    transition: .3s ease-in-out;
+//  }
+//}
 
 
 .options {
@@ -116,22 +118,20 @@
   padding: 10px 22px;
   cursor: pointer;
 
-  &_dark {
-    color: App.$global-white;
-    background-color: App.$global-black;
-  }
-  &_dark:hover {
-    background-color: App.$global-white;
-    color: App.$global-black;
-    transition: .6s ease-in-out;
-    position: initial;
-  }
-
-
   &:hover {
     background-color: App.$global-black;
     color: App.$global-white;
     transition: .6s ease-in-out;
-    position: initial;
+  }
+
+  &_dark {
+    color: App.$global-white;
+    background-color: App.$global-black;
+
+    &:hover {
+      background-color: App.$global-white;
+      color: App.$global-black;
+      transition: .6s ease-in-out;
+    }
   }
 }

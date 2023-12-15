@@ -4,37 +4,57 @@ import {useDispatch} from "react-redux";
 import {cardsApi} from "../services/CardsServise";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import {useAppSelector} from "../hooks/redux";
-import arrow from "./../pictures/selectArrow.svg";
+import arrow from "../pictures/arrowSelect_dark.svg";
 import useTheme from "../hooks/useTheme";
+import ButtonGroup from "./components/ButtonGroup";
 
 const AuthorFilter: React.FC = () => {
     const [authorFilter, setAuthorFilter] = useState<number | undefined>(undefined)
     const [authorFilterName, setAuthorFilterName] = useState<string | undefined>(undefined)
-    const dispatch = useDispatch()
-    const {nameFilter, locationFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({
-        name: nameFilter,
-        authorId: authorFilter,
-        locationId: locationFilter,
-        startDate: startDateFilter,
-        endDate: endDateFilter,
-        page: currentPage,
-        limit: limit
-    })
     const {authors} = useAppSelector(state => state.authorsReducer)
-    useEffect(() => {
 
-        if (data) {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                name: nameFilter,
-                location: locationFilter,
-                author: authorFilter,
-            }))
 
-        }
-    }, [data, authorFilter, nameFilter, locationFilter]);
+    const dispatch = useDispatch()
+    const {nameFilter, locationFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsTwoReducer)
+    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
+    // const {data} = cardsApi.useGetNameFilterQuery({
+    //     name: nameFilter,
+    //     authorId: authorFilter,
+    //     locationId: locationFilter,
+    //     startDate: startDateFilter,
+    //     endDate: endDateFilter,
+    //     page: currentPage,
+    //     limit: limit
+    // })
+
+    // useEffect(() => {
+
+    //     if (data) {
+    //         dispatch(paintingsSlice.actions.filterAction({
+    //             paintingsus: data,
+    //             name: nameFilter,
+    //             location: locationFilter,
+    //             author: authorFilter,
+    //         }))
+    //
+    //     }
+    // }, [data, authorFilter, nameFilter, locationFilter]);
+
+    //     if (data ) {
+    //         dispatch(paintingsSlice.actions.filterAction({
+    //             paintingsus: data,
+    //             author: authorFilter,
+    //             name: nameFilter,
+    //             location: locationFilter,
+    //             startDate: startDateFilter,
+    //             endDate: endDateFilter
+    //         }))
+    //     }
+    // }, [data,
+    //     authorFilter,
+    //     nameFilter,
+    //     locationFilter,
+    //     startDateFilter, endDateFilter]);
 
 
     const [isOpen, setIsOpen] = useState(false)
@@ -45,10 +65,10 @@ const AuthorFilter: React.FC = () => {
 
     }
 
-    const clearAuthorFilter = () => {
-        setAuthorFilter(undefined)
-        setAuthorFilterName(undefined)
-    }
+    // const clearAuthorFilter = () => {
+    //     setAuthorFilter(undefined)
+    //     setAuthorFilterName(undefined)
+    // }
     const {darkMode} = useTheme()
 
 
@@ -60,21 +80,28 @@ const AuthorFilter: React.FC = () => {
 
             <span className={classes.container__name}>{authorFilterName ? authorFilterName : 'Author'}</span>
 
-            <div className={classes.container__buttons}>
+            {/*<div className={classes.container__buttons}>*/}
 
-                <button
-                    className={`${classes.clear_btn} ${authorFilterName == undefined ? classes.clear_btn__hide : ''}`}
-                    onClick={event => {
-                        event.stopPropagation()
-                        clearAuthorFilter()
-                    }}>
-                    &times;
-                </button>
-                <div className={classes.container__arrow}>
-                    <img src={arrow}
-                         className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>
-                </div>
-            </div>
+            {/*    <button*/}
+            {/*        className={`${classes.clear_btn} ${authorFilterName == undefined ? classes.clear_btn__hide : ''}`}*/}
+            {/*        onClick={event => {*/}
+            {/*            event.stopPropagation()*/}
+            {/*            clearAuthorFilter()*/}
+            {/*        }}>*/}
+            {/*        &times;*/}
+            {/*    </button>*/}
+            {/*    <div className={classes.container__arrow}>*/}
+            {/*        <img src={arrow}*/}
+            {/*             className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            <ButtonGroup isOpen={isOpen}
+                         filterName={authorFilterName}
+                         setFilter={() => setAuthorFilter(undefined)}
+                         setFilterName={() => setAuthorFilterName(undefined)}
+
+            />
 
             <ul className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 {authors?.map((author) =>

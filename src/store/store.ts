@@ -6,12 +6,14 @@ import {authorsSlice} from "./reducers/authorsSlice";
 import {paginationSlice} from "./reducers/paginationSlice";
 import {dateSlice} from "./reducers/dateSlice";
 import {themeSlice} from "./reducers/themeSlice";
+import {paintingsSliceTwo} from "./reducers/paintingsSlice1";
 
 
 export const store = configureStore({
     reducer: {
         [cardsApi.reducerPath]: cardsApi.reducer,
         paintingsReducer:paintingsSlice.reducer,
+        paintingsTwoReducer:paintingsSliceTwo.reducer,
         authorsReducer:authorsSlice.reducer,
         locationsReducer:locationsSlice.reducer,
         paginationReducer: paginationSlice.reducer,

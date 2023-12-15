@@ -9,7 +9,8 @@ const Cards = () => {
 
     const {authors} = useAppSelector(state => state.authorsReducer)
     const {locations} = useAppSelector(state => state.locationsReducer)
-    const {paintings: cards} = useAppSelector(state => state.paintingsReducer)
+    // const {paintings: cards} = useAppSelector(state => state.paintingsReducer)
+    const {paintings: cards} = useAppSelector(state => state.paintingsTwoReducer)
     const { darkMode } = useTheme();
 
     return (

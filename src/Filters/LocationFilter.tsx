@@ -4,8 +4,9 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "../hooks/redux";
 import {cardsApi} from "../services/CardsServise";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
-import arrow from "../pictures/selectArrow.svg";
+import arrow from "../pictures/arrowSelect_dark.svg";
 import useTheme from "../hooks/useTheme";
+import ButtonGroup from "./components/ButtonGroup";
 
 
 
@@ -29,15 +30,31 @@ const LocationFilter: React.FC = () => {
 
     useEffect(() => {
 
-        if (data) {
+    //     if (data) {
+    //         dispatch(paintingsSlice.actions.filterAction({
+    //             paintingsus: data,
+    //             author: authorFilter,
+    //             name: nameFilter,
+    //             location: locationFilter
+    //         }))
+    //     }
+    // }, [data, authorFilter, nameFilter, locationFilter]);
+
+        if (data ) {
             dispatch(paintingsSlice.actions.filterAction({
                 paintingsus: data,
                 author: authorFilter,
                 name: nameFilter,
-                location: locationFilter
+                location: locationFilter,
+                startDate: startDateFilter,
+                endDate: endDateFilter
             }))
         }
-    }, [data, authorFilter, nameFilter, locationFilter]);
+    }, [data,
+        authorFilter,
+        nameFilter,
+        locationFilter,
+        startDateFilter, endDateFilter]);
 
     const {locations} = useAppSelector(state => state.locationsReducer)
     const {darkMode} = useTheme()
@@ -48,12 +65,12 @@ const LocationFilter: React.FC = () => {
         setLocationFilterName(locationName);
 
     }
-    const clearLocationFilter = () => {
-
-        setLocationFilter(undefined)
-        setLocationFilterName(undefined)
-
-    }
+    // const clearLocationFilter = () => {
+    //
+    //     setLocationFilter(undefined)
+    //     setLocationFilterName(undefined)
+    //
+    // }
 
     return (
 
@@ -64,21 +81,28 @@ const LocationFilter: React.FC = () => {
 
             <span className={classes.name}>{locationFilterName ? locationFilterName : 'Location'}</span>
 
-            <div className={classes.container__buttons}>
+            {/*<div className={classes.container__buttons}>*/}
 
-                <button
-                    className={`${classes.clear_btn} ${locationFilterName == undefined ? classes.clear_btn__hide : ''}`}
-                    onClick={event => {
-                        event.stopPropagation()
-                        clearLocationFilter()
-                    }}
-                >
-                    &times;</button>
+            {/*    <button*/}
+            {/*        className={`${classes.clear_btn} ${locationFilterName == undefined ? classes.clear_btn__hide : ''}`}*/}
+            {/*        onClick={event => {*/}
+            {/*            event.stopPropagation()*/}
+            {/*            clearLocationFilter()*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*        &times;</button>*/}
 
-                <div className={classes.container__arrow}>
-                    <img src={arrow}  className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>
-                </div>
-            </div>
+            {/*    <div className={classes.container__arrow}>*/}
+            {/*        <img src={arrow}  className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
+            <ButtonGroup isOpen={isOpen}
+                         filterName={locationFilterName}
+                         setFilter={() => setLocationFilter(undefined)}
+                         setFilterName={() => setLocationFilterName(undefined)}
+
+            />
 
             <ul className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 {locations?.map((location) =>
