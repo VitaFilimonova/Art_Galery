@@ -7,6 +7,9 @@ import {useAppSelector} from "../hooks/redux";
 import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
+import useVariables from "../hooks/useVariables";
+import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
+import Input from "./components/Input";
 
 
 const DateFilter: React.FC = () => {
@@ -15,35 +18,27 @@ const DateFilter: React.FC = () => {
     const [startDateFilter, setStartDateFilter] = useState<string | undefined>(undefined);
     const [endDateFilter, setEndDateFilter] = useState<string | undefined>(undefined);
     const dispatch = useDispatch()
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {nameFilter, authorFilter, locationFilter} = useAppSelector(state => state.paintingsReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({
-        name: nameFilter,
-        authorId: authorFilter,
-        locationId: locationFilter,
-        startDate: startDateFilter,
-        endDate: endDateFilter,
-        page: currentPage,
-        limit: limit
-    })
+    const {data} = useVariables()
+
+    // const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
+    // const {nameFilter, authorFilter, locationFilter} = useAppSelector(state => state.paintingsReducer)
+    // const {data} = cardsApi.useGetNameFilterQuery({
+    //     name: nameFilter,
+    //     authorId: authorFilter,
+    //     locationId: locationFilter,
+    //     startDate: startDateFilter,
+    //     endDate: endDateFilter,
+    //     page: currentPage,
+    //     limit: limit
+    // })
 
     useEffect(() => {
 
         if (data) {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                author: authorFilter,
-                name: nameFilter,
-                location: locationFilter,
-                startDate: startDateFilter,
-                endDate: endDateFilter
-            }))
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
+            dispatch(paintingsSliceTwo.actions.dateFilter({startDate: startDateFilter, endDate: endDateFilter}))
         }
-    }, [data,
-        authorFilter,
-        nameFilter,
-        locationFilter,
-        startDateFilter, endDateFilter]);
+    }, [data, startDateFilter, endDateFilter]);
 
 
     const dataSetStart = (start: string | undefined) => {
@@ -90,7 +85,7 @@ const DateFilter: React.FC = () => {
         }
     }
 
-
+console.log(useAppSelector(state => state.paintingsTwoReducer.activeFilter))
     // const checkError = () => {
     //  if (startDateFilter !==undefined && endDateFilter !==undefined) {
     //      (+startDateFilter < +endDateFilter) ? setError(false) : setError(true)
@@ -111,25 +106,16 @@ const DateFilter: React.FC = () => {
             }}>
             <span className={classes.name}>Created</span>
 
-            {/*<div className={classes.buttons}>*/}
-            {/*    <div className={classes.carette}>*/}
-            {/*        <img src={arrow} className={`${classes.carette_img} ${isOpen ? classes.carette_img__open : ''}`} alt={'arrow'}/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <ButtonGroup isOpen={isOpen}/>
+
             <div
                 className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 <div className={classes.options__text}>Write a 4-digit date number</div>
                 <div className={classes.inputs}>
-                    <input id={'start'}
-                        // type='text'
-                           placeholder={'from'}
-                           className={classes.input}
-                           value={startDateFilter}
-                           onClick={(event) => event.stopPropagation()}
-                           onChange={(event) => dataSetStart(event.target.value)}
-                    >
-                    </input>
+                   <Input id={'start'} placeholder={'from'} value={startDateFilter}
+                          // dataSet={()=> dataSetStart()}
+                   />
+
                     <span className={classes.line}></span>
                     <input id={'end'}
                            placeholder={'before'}

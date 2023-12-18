@@ -10,7 +10,6 @@ import {cardsApi} from "../services/CardsServise";
 // }
 
 const useVariables = () => {
-    const dispatch = useDispatch()
     const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
 
     const {nameFilter, authorFilter,locationFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsTwoReducer)

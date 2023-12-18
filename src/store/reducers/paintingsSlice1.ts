@@ -27,28 +27,11 @@ export const paintingsSliceTwo = createSlice({
     name: 'cardsTwo',
     initialState,
     reducers: {
-        filterAction: (state, action: PayloadAction<{
-            paintingsus?: IPaintings[],
-            // author?: number,
-            // name?: string,
-            // location?: number,
-            // startDate?: string,
-            // endDate?: string,
-            // activeFilter?: boolean
-        }>) => {
+        filterAction: (state, action: PayloadAction<{ paintingsus?: IPaintings[], }>) => {
+
             if (action.payload.paintingsus !== undefined) {
                 state.paintings = action.payload.paintingsus;
             }
-
-            // state.authorFilter = action.payload.author;
-            // state.locationFilter = action.payload.location;
-            //
-            // if (action.payload.name !== '' || action.payload.name !== undefined) {
-            //     state.nameFilter = action.payload.name;
-            // }
-
-            // state.startDateFilter = action.payload.startDate;
-            // state.endDateFilter = action.payload.endDate;
 
             state.activeFilter =
                 state.authorFilter !== undefined ||
@@ -72,8 +55,6 @@ export const paintingsSliceTwo = createSlice({
             }
         },
         dateFilter: (state, action: PayloadAction<{startDate?: string, endDate?: string }>) => {
-
-
             state.startDateFilter = action.payload.startDate;
             state.endDateFilter = action.payload.endDate;
         },

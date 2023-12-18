@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./AuthorFilter.module.scss";
 import {useDispatch} from "react-redux";
-import {cardsApi} from "../services/CardsServise";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import {useAppSelector} from "../hooks/redux";
-import arrow from "../pictures/arrowSelect_dark.svg";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
 import useVariables from "../hooks/useVariables";
@@ -27,9 +24,9 @@ const AuthorFilter: React.FC = () => {
 
     useEffect(() => {
         if (data) {
-            dispatch(paintingsSliceTwo.actions.authorFilter({author: authorFilter}))
+            dispatch(paintingsSliceTwo.actions.authorFilter({author: authorFilter}));
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
         }
-        dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
     }, [data, authorFilter]);
     return (
         <div
@@ -39,22 +36,6 @@ const AuthorFilter: React.FC = () => {
             onClick={() => setIsOpen(prevState => !prevState)}>
 
             <span className={classes.container__name}>{authorFilterName ? authorFilterName : 'Author'}</span>
-
-            {/*<div className={classes.container__buttons}>*/}
-
-            {/*    <button*/}
-            {/*        className={`${classes.clear_btn} ${authorFilterName == undefined ? classes.clear_btn__hide : ''}`}*/}
-            {/*        onClick={event => {*/}
-            {/*            event.stopPropagation()*/}
-            {/*            clearAuthorFilter()*/}
-            {/*        }}>*/}
-            {/*        &times;*/}
-            {/*    </button>*/}
-            {/*    <div className={classes.container__arrow}>*/}
-            {/*        <img src={arrow}*/}
-            {/*             className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
 
             <ButtonGroup isOpen={isOpen}
                          filterName={authorFilterName}
