@@ -7,6 +7,8 @@ import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import arrow from "../pictures/arrowSelect_dark.svg";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
+import useVariables from "../hooks/useVariables";
+import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
 
 
 
@@ -14,63 +16,24 @@ const LocationFilter: React.FC = () => {
     const [locationFilter, setLocationFilter] = useState<number | undefined>(undefined)
     const [locationFilterName, setLocationFilterName] = useState<string | undefined>(undefined)
     const [isOpen, setIsOpen] = useState(false)
-
-
+    const {locations} = useAppSelector(state => state.locationsReducer)
     const dispatch = useDispatch()
-    const {nameFilter, authorFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({
-        name: nameFilter,
-        authorId: authorFilter,
-        locationId: locationFilter,
-        startDate: startDateFilter, endDate: endDateFilter,
-        page: currentPage,
-        limit: limit
-    })
+    const {darkMode} = useTheme()
+    const {data} = useVariables()
+
 
     useEffect(() => {
-
-    //     if (data) {
-    //         dispatch(paintingsSlice.actions.filterAction({
-    //             paintingsus: data,
-    //             author: authorFilter,
-    //             name: nameFilter,
-    //             location: locationFilter
-    //         }))
-    //     }
-    // }, [data, authorFilter, nameFilter, locationFilter]);
-
-        if (data ) {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                author: authorFilter,
-                name: nameFilter,
-                location: locationFilter,
-                startDate: startDateFilter,
-                endDate: endDateFilter
-            }))
+        if (data) {
+            dispatch(paintingsSliceTwo.actions.locationFilter({location:  locationFilter}))
         }
-    }, [data,
-        authorFilter,
-        nameFilter,
-        locationFilter,
-        startDateFilter, endDateFilter]);
+        dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+    }, [data, locationFilter]);
 
-    const {locations} = useAppSelector(state => state.locationsReducer)
-    const {darkMode} = useTheme()
 
     const handleOptionClick = (locationId: number, locationName: string) => {
-
         setLocationFilter(locationId);
         setLocationFilterName(locationName);
-
     }
-    // const clearLocationFilter = () => {
-    //
-    //     setLocationFilter(undefined)
-    //     setLocationFilterName(undefined)
-    //
-    // }
 
     return (
 

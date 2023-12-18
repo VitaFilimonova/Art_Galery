@@ -7,76 +7,36 @@ import {useAppSelector} from "../hooks/redux";
 import arrow from "../pictures/arrowSelect_dark.svg";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
+import useVariables from "../hooks/useVariables";
+import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
 
 const AuthorFilter: React.FC = () => {
     const [authorFilter, setAuthorFilter] = useState<number | undefined>(undefined)
     const [authorFilterName, setAuthorFilterName] = useState<string | undefined>(undefined)
-    const {authors} = useAppSelector(state => state.authorsReducer)
-
-
-    const dispatch = useDispatch()
-    const {nameFilter, locationFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsTwoReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    // const {data} = cardsApi.useGetNameFilterQuery({
-    //     name: nameFilter,
-    //     authorId: authorFilter,
-    //     locationId: locationFilter,
-    //     startDate: startDateFilter,
-    //     endDate: endDateFilter,
-    //     page: currentPage,
-    //     limit: limit
-    // })
-
-    // useEffect(() => {
-
-    //     if (data) {
-    //         dispatch(paintingsSlice.actions.filterAction({
-    //             paintingsus: data,
-    //             name: nameFilter,
-    //             location: locationFilter,
-    //             author: authorFilter,
-    //         }))
-    //
-    //     }
-    // }, [data, authorFilter, nameFilter, locationFilter]);
-
-    //     if (data ) {
-    //         dispatch(paintingsSlice.actions.filterAction({
-    //             paintingsus: data,
-    //             author: authorFilter,
-    //             name: nameFilter,
-    //             location: locationFilter,
-    //             startDate: startDateFilter,
-    //             endDate: endDateFilter
-    //         }))
-    //     }
-    // }, [data,
-    //     authorFilter,
-    //     nameFilter,
-    //     locationFilter,
-    //     startDateFilter, endDateFilter]);
-
-
     const [isOpen, setIsOpen] = useState(false)
+    const {authors} = useAppSelector(state => state.authorsReducer)
+    const dispatch = useDispatch()
+    const {darkMode} = useTheme()
+    const {data} = useVariables()
+
     const handleOptionClick = (authorId: number, authorName: string) => {
 
         setAuthorFilter(authorId);
         setAuthorFilterName(authorName);
-
     }
 
-    // const clearAuthorFilter = () => {
-    //     setAuthorFilter(undefined)
-    //     setAuthorFilterName(undefined)
-    // }
-    const {darkMode} = useTheme()
-
-
+    useEffect(() => {
+        if (data) {
+            dispatch(paintingsSliceTwo.actions.authorFilter({author: authorFilter}))
+        }
+        dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+    }, [data, authorFilter]);
     return (
-        <div className={`${classes.container} ${isOpen ? classes.container_open : ''} ${darkMode ? classes.container_dark : ''}`}
-             onBlur={() => setIsOpen(false)}
-             tabIndex={0}
-             onClick={() => setIsOpen(prevState => !prevState)}>
+        <div
+            className={`${classes.container} ${isOpen ? classes.container_open : ''} ${darkMode ? classes.container_dark : ''}`}
+            onBlur={() => setIsOpen(false)}
+            tabIndex={0}
+            onClick={() => setIsOpen(prevState => !prevState)}>
 
             <span className={classes.container__name}>{authorFilterName ? authorFilterName : 'Author'}</span>
 
@@ -105,7 +65,8 @@ const AuthorFilter: React.FC = () => {
 
             <ul className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 {authors?.map((author) =>
-                    <li value={author.id} key={author.id} className={`${classes.option}  ${darkMode ? classes.option_dark : ''}`}
+                    <li value={author.id} key={author.id}
+                        className={`${classes.option}  ${darkMode ? classes.option_dark : ''}`}
                         onClick={() => handleOptionClick(author.id, author.name)}> {author.name} </li>)
                 }
             </ul>
@@ -117,52 +78,3 @@ const AuthorFilter: React.FC = () => {
 export default AuthorFilter;
 
 
-
-
-
-//
-//
-// import React, {useEffect, useState} from 'react';
-// import FilterDropdown from './components/FilterDropdown';
-// import { useDispatch } from 'react-redux';
-// import { paintingsSlice } from '../store/reducers/paintingsSlice';
-// import { useAppSelector } from '../hooks/redux';
-// import useTheme from '../hooks/useTheme';
-// import {authorsSlice} from "../store/reducers/authorsSlice";
-// import {cardsApi} from "../services/CardsServise";
-//
-// const AuthorFilterComponent: React.FC = () => {
-//     const dispatch = useDispatch()
-//     const {nameFilter, authorFilter, locationFilter} = useAppSelector(state => state.paintingsReducer)
-//     const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-//     const {data} = cardsApi.useGetNameFilterQuery({
-//         name: nameFilter,
-//         authorId: authorFilter,
-//         locationId: locationFilter,
-//         page: currentPage,
-//         limit: limit
-//     })
-//
-//     useEffect(() => {
-//
-//         if (data) {
-//             dispatch(paintingsSlice.actions.filterAction({
-//                 paintingsus: data,
-//                 author: authorFilter,
-//                 name: nameFilter,
-//                 location: locationFilter
-//             }))
-//         }
-//     }, [data, authorFilter, nameFilter, locationFilter]);
-//     const { authors } = useAppSelector(state => state.authorsReducer);
-//
-//
-//     return (
-//         <FilterDropdown
-//             filterType="Author"
-//             filterItems={authors}
-//         />
-//     );
-// };
-//
-// export default AuthorFilterComponent;

@@ -6,12 +6,13 @@ import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import {useAppSelector} from "../hooks/redux";
 import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
 import useTheme from "../hooks/useTheme";
+import useVariables from "../hooks/useVariables";
 
 
 const NameFilter: React.FC = () => {
     const [nameFilter, setNameFilter] = useState<string | undefined>(undefined)
     const {darkMode} = useTheme()
-
+const {data} = useVariables()
     const dispatch = useDispatch()
     // const {
     //     authorFilter,
@@ -20,22 +21,22 @@ const NameFilter: React.FC = () => {
     //     endDateFilter
     // } = useAppSelector(state => state.paintingsReducer)
 
-    const {
-        authorFilter,
-        locationFilter,
-        startDateFilter,
-        endDateFilter
-    } = useAppSelector(state => state.paintingsTwoReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({
-        name: nameFilter,
-        authorId: authorFilter,
-        locationId: locationFilter,
-        startDate: startDateFilter,
-        endDate: endDateFilter,
-        page: currentPage,
-        limit: limit
-    })
+    // const {
+    //     authorFilter,
+    //     locationFilter,
+    //     startDateFilter,
+    //     endDateFilter
+    // } = useAppSelector(state => state.paintingsTwoReducer)
+    // const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
+    // const {data} = cardsApi.useGetNameFilterQuery({
+    //     name: nameFilter,
+    //     authorId: authorFilter,
+    //     locationId: locationFilter,
+    //     startDate: startDateFilter,
+    //     endDate: endDateFilter,
+    //     page: currentPage,
+    //     limit: limit
+    // })
     //
     //
     // useEffect(() => {
@@ -73,7 +74,7 @@ const NameFilter: React.FC = () => {
         dispatch(paintingsSliceTwo.actions.nameFilter({name: nameFilter}))}
         dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
     }, [data, nameFilter]);
-
+console.log(useAppSelector(state => state.paintingsTwoReducer.nameFilter))
     return (
         <div>
             <input type="text"

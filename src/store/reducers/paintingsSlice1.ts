@@ -50,12 +50,12 @@ export const paintingsSliceTwo = createSlice({
             // state.startDateFilter = action.payload.startDate;
             // state.endDateFilter = action.payload.endDate;
 
-            // state.activeFilter =
-            //     state.authorFilter !== undefined ||
-            //     state.locationFilter !== undefined ||
-            //     state.nameFilter !== undefined ||
-            //     state.startDateFilter !== undefined ||
-            //     state.endDateFilter !== undefined;
+            state.activeFilter =
+                state.authorFilter !== undefined ||
+                state.locationFilter !== undefined ||
+                state.nameFilter !== undefined ||
+                state.startDateFilter !== undefined ||
+                state.endDateFilter !== undefined;
         },
         authorFilter: (state, action: PayloadAction<{author?: number}>) => {
             state.authorFilter = action.payload.author;
@@ -65,8 +65,10 @@ export const paintingsSliceTwo = createSlice({
         },
         nameFilter: (state, action: PayloadAction<{name?: string| undefined}>) => {
 
-            if (action.payload.name !== '' || action.payload.name !== undefined) {
+            if (action.payload.name !== '' ) {
                 state.nameFilter = action.payload.name;
+            } else {
+                state.nameFilter =  undefined
             }
         },
         dateFilter: (state, action: PayloadAction<{startDate?: string, endDate?: string }>) => {
@@ -75,17 +77,15 @@ export const paintingsSliceTwo = createSlice({
             state.startDateFilter = action.payload.startDate;
             state.endDateFilter = action.payload.endDate;
         },
-        activeFilter: (state, action: PayloadAction<{activeFilter?: boolean }>) => {
-
-            state.activeFilter =
-                state.authorFilter !== undefined ||
-                state.locationFilter !== undefined ||
-                state.nameFilter !== undefined ||
-                state.startDateFilter !== undefined ||
-                state.endDateFilter !== undefined;
-        },
-
-
+        // activeFilter: (state) => {
+        //
+        //     state.activeFilter =
+        //         state.authorFilter !== undefined ||
+        //         state.locationFilter !== undefined ||
+        //         state.nameFilter !== undefined ||
+        //         state.startDateFilter !== undefined ||
+        //         state.endDateFilter !== undefined;
+        // },
     },
     extraReducers: {
         [fetchPaintings.fulfilled.type]: (state, action: PayloadAction<IPaintings[]>) => {
@@ -103,5 +103,5 @@ export const paintingsSliceTwo = createSlice({
     }
 })
 
-export const {filterAction, dateFilter, nameFilter, locationFilter , activeFilter , authorFilter} = paintingsSliceTwo.actions
+export const {filterAction, dateFilter, nameFilter, locationFilter  , authorFilter} = paintingsSliceTwo.actions
 export default paintingsSliceTwo.reducer

@@ -8,34 +8,26 @@ import doubleArrRight from './../pictures/doubleArrowR.svg'
 import arrRight from './../pictures/arrow_right.svg'
 import {cardsApi, useGetPaintingsQuery} from "../services/CardsServise";
 import useTheme from "../hooks/useTheme";
+import useVariables from ".././hooks/useVariables";
+
 
 
 const Pagination: React.FC = () => {
     const limit = useAppSelector(state => state.paginationReducer.limit)
     const {data} = useGetPaintingsQuery({limit})
     const {currentPage, totalPages} = useAppSelector(state => state.paginationReducer);
-    const {
-        nameFilter,
-        authorFilter,
-        locationFilter,
-        startDateFilter,
-        endDateFilter,
-        activeFilter
-    } = useAppSelector(state => state.paintingsReducer);
+    const {activeFilter} = useAppSelector(state => state.paintingsTwoReducer);
     const dispatch = useAppDispatch();
-    const {data: dataPagination} = cardsApi.useGetNameFilterQuery({
-        locationId: locationFilter,
-        authorId: authorFilter,
-        name: nameFilter,
-        startDate: startDateFilter,
-        endDate: endDateFilter
-    })
+
     const {darkMode} = useTheme()
 
-    useEffect(() => {
+const {dataWithoutLimit} = useVariables()
+    useEffect(
+        () => {
+
         if (data) {
-            if (activeFilter && dataPagination) {
-                const pages = Math.ceil(dataPagination.length / limit)
+            if (activeFilter && dataWithoutLimit) {
+                const pages = Math.ceil(dataWithoutLimit.length / limit)
                 dispatch(setTotalPages(pages))
                 dispatch(setCurrentPage(1))
             } else {
@@ -43,9 +35,7 @@ const Pagination: React.FC = () => {
                 dispatch(setTotalPages(pages))
             }
         }
-    }, [data, limit, dataPagination]);
-
-
+    }, [data, limit, dataWithoutLimit]);
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             dispatch(setCurrentPage(page));
