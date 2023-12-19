@@ -15,7 +15,7 @@ const NameFilter: React.FC = () => {
     useEffect(() => {
         if (data) {
             dispatch(paintingsSliceTwo.actions.nameFilter({name: nameFilter}));
-            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
+            // dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
         }
     }, [data, nameFilter]);
 

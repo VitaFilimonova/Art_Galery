@@ -1,0 +1,59 @@
+@use "src/App";
+
+.button {
+  display: flex;
+  width: 41px;
+  height: 41px;
+  border: 1px solid #000;
+  border-right: none;
+  background: App.$global-white;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    transition: .3s ease-in-out;
+    background: App.$global-grey;
+  }
+
+  &:disabled .button__img {
+    filter: brightness(0.5) invert(0.5);
+  }
+
+  &__img {
+    width: 13.453px;
+    height: 12.813px;
+    align-items: center;
+    justify-self: center;
+  }
+
+  &_dark {
+    background-color: App.$global-black;
+    //background-color: #0C0C0A;
+    color: App.$global-white;
+    border-color: App.$global-white;
+    //fill: 'white';
+
+    &:hover {
+      background-color: App.$global-grey;
+      color: App.$global-black;
+      transition: .6s ease-in-out;
+    }
+  }
+
+}
+
+//.button:hover:not(:disabled) {
+//  transition: .3s ease-in-out;
+//  background: App.$global-grey;
+//}
+
+//.button:disabled .button__img {
+//  filter: brightness(0.5) invert(0.5);
+//}
+
+//.button__img {
+//  width: 13.453px;
+//  height: 12.813px;
+//  align-items: center;
+//  justify-self: center;
+//}

@@ -9,33 +9,33 @@ import arrRight from './../pictures/arrow_right.svg'
 import {cardsApi, useGetPaintingsQuery} from "../services/CardsServise";
 import useTheme from "../hooks/useTheme";
 import useVariables from ".././hooks/useVariables";
-
+import PaginationArrow from "./PaginationArrow";
 
 
 const Pagination: React.FC = () => {
     const limit = useAppSelector(state => state.paginationReducer.limit)
-    const {data} = useGetPaintingsQuery({limit})
+    const {data, isLoading} = useGetPaintingsQuery({limit})
     const {currentPage, totalPages} = useAppSelector(state => state.paginationReducer);
     const {activeFilter} = useAppSelector(state => state.paintingsTwoReducer);
     const dispatch = useAppDispatch();
 
     const {darkMode} = useTheme()
 
-const {dataWithoutLimit} = useVariables()
+    const {dataWithoutLimit} = useVariables()
     useEffect(
         () => {
 
-        if (data) {
-            if (activeFilter && dataWithoutLimit) {
-                const pages = Math.ceil(dataWithoutLimit.length / limit)
-                dispatch(setTotalPages(pages))
-                dispatch(setCurrentPage(1))
-            } else {
-                const pages = Math.ceil(data.length / limit)
-                dispatch(setTotalPages(pages))
+            if (!isLoading && data) {
+                if (activeFilter && dataWithoutLimit) {
+                    const pages = Math.ceil(dataWithoutLimit.length / limit)
+                    dispatch(setTotalPages(pages))
+                    dispatch(setCurrentPage(1))
+                } else {
+                    const pages = Math.ceil(data.length / limit)
+                    dispatch(setTotalPages(pages))
+                }
             }
-        }
-    }, [data, limit, dataWithoutLimit]);
+        }, [data, limit, dataWithoutLimit, isLoading]);
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             dispatch(setCurrentPage(page));
@@ -64,14 +64,18 @@ const {dataWithoutLimit} = useVariables()
     return (
         <div className={classes.container}>
 
-            <button className={classes.button_arrow} onClick={() => handlePageChange(1)}
-                    disabled={currentPage === 1}>
-                <img src={doubleArrLeft} className={classes.button_img} alt={'doubleArrowLeft'}/>
-            </button>
-            <button className={classes.button_arrow} onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}>
-                <img src={arrLeft} className={classes.button_img} alt={'arrowLeft'}/>
-            </button>
+            {/*<button className={classes.button_arrow} onClick={() => handlePageChange(1)}*/}
+            {/*        disabled={currentPage === 1}>*/}
+            {/*    <img src={doubleArrLeft} className={classes.button_img} alt={'doubleArrowLeft'}/>*/}
+            {/*</button>*/}
+            {/*<button className={classes.button_arrow} onClick={() => handlePageChange(currentPage - 1)}*/}
+            {/*        disabled={currentPage === 1}>*/}
+            {/*    <img src={arrLeft} className={classes.button_img} alt={'arrowLeft'}/>*/}
+            {/*</button>*/}
+
+            <PaginationArrow handlePageChange={handlePageChange} currentPageNumber={1} image={doubleArrLeft} pageChange={1} />
+            <PaginationArrow handlePageChange={handlePageChange} currentPageNumber={1} image={arrLeft} pageChange={currentPage - 1}/>
+
 
             {visiblePages.map((page) => (
                 <button
@@ -83,16 +87,19 @@ const {dataWithoutLimit} = useVariables()
                     {page}
                 </button>))}
 
+            <PaginationArrow handlePageChange={handlePageChange} currentPageNumber={totalPages} image={arrRight} pageChange={currentPage + 1} />
+            <PaginationArrow handlePageChange={handlePageChange} currentPageNumber={totalPages} image={doubleArrRight} pageChange={totalPages}/>
 
-            <button className={classes.button_arrow} onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}>
-                <img src={arrRight} className={classes.button_img} alt={'arrowRight'}/>
-            </button>
 
-            <button className={classes.button_arrow} onClick={() => handlePageChange(totalPages)}
-                    disabled={currentPage === totalPages}>
-                <img src={doubleArrRight} className={classes.button_img} alt={'doubleArrowRight'}/>
-            </button>
+            {/*<button className={classes.button_arrow} onClick={() => handlePageChange(currentPage + 1)}*/}
+            {/*        disabled={currentPage === totalPages}>*/}
+            {/*    <img src={arrRight} className={classes.button_img} alt={'arrowRight'}/>*/}
+            {/*</button>*/}
+
+            {/*<button className={classes.button_arrow} onClick={() => handlePageChange(totalPages)}*/}
+            {/*        disabled={currentPage === totalPages}>*/}
+            {/*    <img src={doubleArrRight} className={classes.button_img} alt={'doubleArrowRight'}/>*/}
+            {/*</button>*/}
         </div>
 
     );

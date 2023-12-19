@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "./redux";
 import {cardsApi} from "../services/CardsServise";
+import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
 // import {paintingsSlice} from "../store/reducers/paintingsSlice";
 // import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
 
@@ -11,7 +12,7 @@ import {cardsApi} from "../services/CardsServise";
 
 const useVariables = () => {
     const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-
+const dispatch = useDispatch()
     const {nameFilter, authorFilter,locationFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsTwoReducer)
 
     const {data} = cardsApi.useGetNameFilterQuery({
@@ -30,23 +31,14 @@ const useVariables = () => {
         startDate: startDateFilter,
         endDate: endDateFilter,
     })
-    // useEffect(() => {
-    //     if (data) {
-    //         dispatch(paintingsSliceTwo.actions.filterAction({
-    //             paintingsus: data,
-    //             author: authorFilter,
-    //             name: nameFilter,
-    //             location: locationFilter,
-    //             startDate: startDateFilter,
-    //             endDate: endDateFilter
-    //         }))
-    //     }
-    //
-    // }, [ data,
-    //     activeFilter]);
+    useEffect(() => {
+        if (data) {
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+        }
+    }, [data]);
+
+
     return {
-        // filterValue: useAppSelector((state) => state.paintingsTwoReducer[activeFilter.toLowerCase()]),
-        // setFilter: (value: any) => dispatch(paintingsSlice.actions.filterAction.))
         data,
         dataWithoutLimit
     }

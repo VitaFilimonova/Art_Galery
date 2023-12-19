@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./DateFilter.module.scss";
-import arrow from "../pictures/arrowSelect_dark.svg";
 import {useDispatch} from "react-redux";
-import {cardsApi} from "../services/CardsServise";
-import {useAppSelector} from "../hooks/redux";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
 import useVariables from "../hooks/useVariables";
@@ -20,29 +16,20 @@ const DateFilter: React.FC = () => {
     const dispatch = useDispatch()
     const {data} = useVariables()
 
-    // const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    // const {nameFilter, authorFilter, locationFilter} = useAppSelector(state => state.paintingsReducer)
-    // const {data} = cardsApi.useGetNameFilterQuery({
-    //     name: nameFilter,
-    //     authorId: authorFilter,
-    //     locationId: locationFilter,
-    //     startDate: startDateFilter,
-    //     endDate: endDateFilter,
-    //     page: currentPage,
-    //     limit: limit
-    // })
 
     useEffect(() => {
 
         if (data) {
-            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
+            // dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
             dispatch(paintingsSliceTwo.actions.dateFilter({startDate: startDateFilter, endDate: endDateFilter}))
+        }
+        if (startDateFilter && endDateFilter) {
+            startDateFilter > endDateFilter ? setError(true) : setError(false)
         }
     }, [data, startDateFilter, endDateFilter]);
 
 
     const dataSetStart = (start: string | undefined) => {
-        console.log(start)
         if (start && start.length == 4 && !isNaN(Number(start))) {
             setStartDateFilter(start)
             setError(false)
@@ -51,47 +38,31 @@ const DateFilter: React.FC = () => {
             // if (start && start.length ==0) {
             //     setInputValueStart(undefined)
             // }
+        } else if (start?.length == 0) {
+            setError(false)
         } else {
             setStartDateFilter(undefined)
+
             setError(true)
             // checkError()
         }
-        checkError()
+        // checkError()
     }
     const dataSetEnd = (end: string | undefined) => {
-        console.log(end)
         if (end && end.length == 4 && !isNaN(Number(end))) {
             setEndDateFilter(end)
             setError(false)
             // checkError()
-
+        } else if (end?.length == 0) {
+            setError(false)
         } else {
             setEndDateFilter(undefined)
             setError(true)
             // checkError()
         }
-        checkError()
-
+        // checkError()
 
     }
-
-    const checkError = () => {
-        if (startDateFilter?.length === 4 && endDateFilter?.length === 4) {
-            (Number(startDateFilter) < Number(endDateFilter)) ? setError(false) : setError(true)
-            console.log('gagag')
-        }
-        if (startDateFilter?.length === 0 && endDateFilter?.length === 0) {
-            setError(false)
-        }
-    }
-
-console.log(useAppSelector(state => state.paintingsTwoReducer.activeFilter))
-    // const checkError = () => {
-    //  if (startDateFilter !==undefined && endDateFilter !==undefined) {
-    //      (+startDateFilter < +endDateFilter) ? setError(false) : setError(true)
-    //      console.log('haha')
-    //  }
-
 
     const {darkMode} = useTheme()
 
@@ -112,11 +83,35 @@ console.log(useAppSelector(state => state.paintingsTwoReducer.activeFilter))
                 className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
                 <div className={classes.options__text}>Write a 4-digit date number</div>
                 <div className={classes.inputs}>
-                   <Input id={'start'} placeholder={'from'} value={startDateFilter}
-                          // dataSet={()=> dataSetStart()}
-                   />
+
+                    {/*<Input*/}
+                    {/*    id={'start'}*/}
+                    {/*    placeholder={'from'}*/}
+                    {/*    value={startDateFilter}*/}
+                    {/*    // dateSetFilter={dataSetStart}*/}
+                    {/*    dateSetFilter={setStartDateFilter}*/}
+                    {/*    setErrorFilter={setError}*/}
+                    {/*/>*/}
+
+                    <input id={'start'}
+                           placeholder={'from'}
+                           className={classes.input}
+                           value={startDateFilter}
+                           onClick={(event) => event.stopPropagation()}
+                           onChange={(event) => dataSetStart(event.target.value)}
+                    >
+                    </input>
 
                     <span className={classes.line}></span>
+
+                    {/*<Input*/}
+                    {/*    id={'end'}*/}
+                    {/*    placeholder={'before'}*/}
+                    {/*    value={endDateFilter}*/}
+                    {/*    dateSetFilter={ ()=>setEndDateFilter}*/}
+                    {/*    setErrorFilter={() => setError}*/}
+                    {/*/>*/}
+
                     <input id={'end'}
                            placeholder={'before'}
                            className={classes.input}
@@ -126,6 +121,7 @@ console.log(useAppSelector(state => state.paintingsTwoReducer.activeFilter))
                     >
                     </input>
                 </div>
+
                 <div className={`${classes.error} ${error ? classes.error_open : ''}`}>
                     Please write the end date later than the start date or check data length
                 </div>
