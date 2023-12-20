@@ -11,11 +11,11 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({id, placeholder, value, dateSetFilter, setErrorFilter}) => {
 
     const dateSet = (date: string | undefined) => {
-        if (date && date.length == 4 && !isNaN(Number(date))) {
+        if (date && date.length === 4 && !isNaN(Number(date))) {
             dateSetFilter(date)
             setErrorFilter(false)
         }
-        else if (date?.length ==0) {
+        else if (date?.length === 0) {
             setErrorFilter(false)
         }
 

@@ -11,7 +11,7 @@
   justify-content: space-between;
 
   box-sizing: border-box;
-  border: 1px solid #000;
+  border: 1px solid App.$global-black;
   border-radius: 8px;
   background: App.$global-white;
 
@@ -28,7 +28,6 @@
 
   &_dark {
     background-color: App.$global-black;
-    //background-color: #0C0C0A;
     color: App.$global-white;
     border-color: App.$global-white;
   }

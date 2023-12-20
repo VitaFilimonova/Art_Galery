@@ -3,23 +3,22 @@
 @forward "./../Cards/Cards.module";
 
 .container {
-
-  position: relative;
   width: 265px;
-  box-sizing: border-box;
-  border: 1px solid #000;
-  border-radius: 8px;
-  background: #FFF;
-  font-family: Roboto, serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  align-items: center;
-  padding-left: 15px;
-  display: flex;
-  justify-content: space-between;
   height: 45px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  border: 1px solid App.$global-black;
+  border-radius: 8px;
+  background: App.$global-white;
+
+  @include Cards.font($font-size: 13px, $font-weight: 400);
+  line-height: normal;
+
+  padding-left: 15px;
 
   &_open {
     border-radius: 8px 8px 0 0;
@@ -28,30 +27,15 @@
 
   &_dark {
     background-color: App.$global-black;
-    //background-color: #0C0C0A;
     color: App.$global-white;
     border-color: App.$global-white;
   }
 
 }
 
-.container__open {
-  border-radius: 8px 8px 0 0;
-  border-bottom: 0;
-}
-
-.buttons {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 25px;
-
-}
-
 .options {
   display: none;
   justify-content: center;
-  align-content: center;
   align-items: center;
   position: absolute;
   width: calc(100% + 2px);
@@ -71,11 +55,18 @@
     color: App.$global-white;
     border-color: App.$global-white;
 
-    .options__text , .error_open,  {
+    .options__text, .error_open, {
       color: App.$global-white;
     }
 
+    .input {
+      background-color: App.$global-white;
+      color: App.$global-black;
+    }
 
+    .line {
+      background-color: App.$global-white;
+    }
   }
 
   &_open {
@@ -84,7 +75,7 @@
 
   &__text {
     font-size: 10px;
-    color: black;
+    color: App.$global-black;
     display: flex;
     margin-bottom: 10px;
   }
@@ -101,16 +92,14 @@
   width: 95px;
   height: 45px;
   border-radius: 8px;
-  background: #EFEFEF;
+  background: App.$global-grey;
   padding-left: 10px;
 }
 
 .line {
   width: 12px;
   height: 1px;
-  color: #000000;
-  justify-content: center;
-  background-color: black;
+  background-color: App.$global-black;
   margin: 0 10px
 }
 
@@ -120,19 +109,15 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  color: #000;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
+  color: App.$global-black;
+  @include Cards.font($font-size: 16px, $font-weight: 500);
   line-height: 20px;
-}
 
-.option:hover {
-  background-color: black;
-  color: #FFFFFF;
-  transition: .6s ease-in-out;
-
+  &:hover {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    transition: .6s ease-in-out;
+  }
 }
 
 .error {
@@ -140,11 +125,11 @@
   color: black;
   display: none;
   margin-top: 5px;
-}
 
-.error_open {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  &_open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
