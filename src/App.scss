@@ -2,18 +2,15 @@
 
 $global-white: #ffffff;
 $global-grey: #ededed;
+$global-grey-opacity: #464646;
 $global-black: #000000;
 $global-font: Roboto, serif;
 $global-font-style: normal;
 
 .App {
-    /*display: grid;*/
     margin: 0 auto;
-    /*align-items: center;*/
     width: 1120px;
 }
-
-
 
 body {
     background-color: $global-white;

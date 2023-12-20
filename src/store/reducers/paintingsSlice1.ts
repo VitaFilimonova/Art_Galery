@@ -58,15 +58,15 @@ export const paintingsSliceTwo = createSlice({
             state.startDateFilter = action.payload.startDate;
             state.endDateFilter = action.payload.endDate;
         },
-        // activeFilter: (state) => {
-        //
-        //     state.activeFilter =
-        //         state.authorFilter !== undefined ||
-        //         state.locationFilter !== undefined ||
-        //         state.nameFilter !== undefined ||
-        //         state.startDateFilter !== undefined ||
-        //         state.endDateFilter !== undefined;
-        // },
+        activeFilter: (state) => {
+
+            state.activeFilter =
+                state.authorFilter !== undefined ||
+                state.locationFilter !== undefined ||
+                state.nameFilter !== undefined ||
+                state.startDateFilter !== undefined ||
+                state.endDateFilter !== undefined;
+        },
     },
     extraReducers: {
         [fetchPaintings.fulfilled.type]: (state, action: PayloadAction<IPaintings[]>) => {
@@ -84,5 +84,5 @@ export const paintingsSliceTwo = createSlice({
     }
 })
 
-export const {filterAction, dateFilter, nameFilter, locationFilter  , authorFilter} = paintingsSliceTwo.actions
+export const {filterAction, dateFilter, nameFilter, locationFilter  , authorFilter, activeFilter} = paintingsSliceTwo.actions
 export default paintingsSliceTwo.reducer

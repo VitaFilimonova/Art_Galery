@@ -15,12 +15,11 @@ const DateFilter: React.FC = () => {
     const [endDateFilter, setEndDateFilter] = useState<string | undefined>(undefined);
     const dispatch = useDispatch()
     const {data} = useVariables()
-
+    const {darkMode} = useTheme()
 
     useEffect(() => {
-
         if (data) {
-            // dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
             dispatch(paintingsSliceTwo.actions.dateFilter({startDate: startDateFilter, endDate: endDateFilter}))
         }
         if (startDateFilter && endDateFilter) {
@@ -33,38 +32,28 @@ const DateFilter: React.FC = () => {
         if (start && start.length == 4 && !isNaN(Number(start))) {
             setStartDateFilter(start)
             setError(false)
-            // checkError()
-            // }
-            // if (start && start.length ==0) {
-            //     setInputValueStart(undefined)
-            // }
+
         } else if (start?.length == 0) {
             setError(false)
+
         } else {
             setStartDateFilter(undefined)
-
             setError(true)
-            // checkError()
         }
-        // checkError()
     }
     const dataSetEnd = (end: string | undefined) => {
         if (end && end.length == 4 && !isNaN(Number(end))) {
             setEndDateFilter(end)
             setError(false)
-            // checkError()
+
         } else if (end?.length == 0) {
             setError(false)
+
         } else {
             setEndDateFilter(undefined)
             setError(true)
-            // checkError()
         }
-        // checkError()
-
     }
-
-    const {darkMode} = useTheme()
 
     return (
         <div
@@ -84,42 +73,42 @@ const DateFilter: React.FC = () => {
                 <div className={classes.options__text}>Write a 4-digit date number</div>
                 <div className={classes.inputs}>
 
-                    {/*<Input*/}
-                    {/*    id={'start'}*/}
-                    {/*    placeholder={'from'}*/}
-                    {/*    value={startDateFilter}*/}
-                    {/*    // dateSetFilter={dataSetStart}*/}
-                    {/*    dateSetFilter={setStartDateFilter}*/}
-                    {/*    setErrorFilter={setError}*/}
-                    {/*/>*/}
+                    <Input
+                        id={'start'}
+                        placeholder={'from'}
+                        value={startDateFilter}
+                        // dateSetFilter={dataSetStart}
+                        dateSetFilter={setStartDateFilter}
+                        setErrorFilter={setError}
+                    />
 
-                    <input id={'start'}
-                           placeholder={'from'}
-                           className={classes.input}
-                           value={startDateFilter}
-                           onClick={(event) => event.stopPropagation()}
-                           onChange={(event) => dataSetStart(event.target.value)}
-                    >
-                    </input>
+                    {/*<input id={'start'}*/}
+                    {/*       placeholder={'from'}*/}
+                    {/*       className={classes.input}*/}
+                    {/*       value={startDateFilter}*/}
+                    {/*       onClick={(event) => event.stopPropagation()}*/}
+                    {/*       onChange={(event) => dataSetStart(event.target.value)}*/}
+                    {/*>*/}
+                    {/*</input>*/}
 
                     <span className={classes.line}></span>
 
-                    {/*<Input*/}
-                    {/*    id={'end'}*/}
-                    {/*    placeholder={'before'}*/}
-                    {/*    value={endDateFilter}*/}
-                    {/*    dateSetFilter={ ()=>setEndDateFilter}*/}
-                    {/*    setErrorFilter={() => setError}*/}
-                    {/*/>*/}
+                    <Input
+                        id={'end'}
+                        placeholder={'before'}
+                        value={endDateFilter }
+                        dateSetFilter={ setEndDateFilter}
+                        setErrorFilter={ setError}
+                    />
 
-                    <input id={'end'}
-                           placeholder={'before'}
-                           className={classes.input}
-                           value={endDateFilter}
-                           onClick={(event) => event.stopPropagation()}
-                           onChange={(event) => dataSetEnd(event.target.value)}
-                    >
-                    </input>
+                    {/*<input id={'end'}*/}
+                    {/*       placeholder={'before'}*/}
+                    {/*       className={classes.input}*/}
+                    {/*       value={endDateFilter}*/}
+                    {/*       onClick={(event) => event.stopPropagation()}*/}
+                    {/*       onChange={(event) => dataSetEnd(event.target.value)}*/}
+                    {/*>*/}
+                    {/*</input>*/}
                 </div>
 
                 <div className={`${classes.error} ${error ? classes.error_open : ''}`}>

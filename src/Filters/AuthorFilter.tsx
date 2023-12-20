@@ -25,7 +25,7 @@ const AuthorFilter: React.FC = () => {
     useEffect(() => {
         if (data) {
             dispatch(paintingsSliceTwo.actions.authorFilter({author: authorFilter}));
-            // dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
         }
     }, [data, authorFilter]);
     return (

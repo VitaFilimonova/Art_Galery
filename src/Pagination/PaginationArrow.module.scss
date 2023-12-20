@@ -10,6 +10,34 @@
   align-items: center;
   justify-content: center;
 
+  &__img {
+    width: 13px;
+    height: 12px;
+
+    &_dark {
+      filter: brightness(0.5) invert(1.5);
+    }
+  }
+
+  &_dark {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    border-color: App.$global-white;
+
+    &.button_last {
+      border: 1px solid App.$global-white;
+    }
+  }
+
+  &_first {
+    border-radius: 10px 0 0 10px;
+  }
+
+  &_last {
+    border-right: 1px solid App.$global-black;
+    border-radius: 0 10px 10px 0;
+  }
+
   &:hover:not(:disabled) {
     transition: .3s ease-in-out;
     background: App.$global-grey;
@@ -18,42 +46,12 @@
   &:disabled .button__img {
     filter: brightness(0.5) invert(0.5);
   }
-
-  &__img {
-    width: 13.453px;
-    height: 12.813px;
-    align-items: center;
-    justify-self: center;
-  }
-
-  &_dark {
-    background-color: App.$global-black;
-    //background-color: #0C0C0A;
-    color: App.$global-white;
-    border-color: App.$global-white;
-    //fill: 'white';
-
-    &:hover {
-      background-color: App.$global-grey;
-      color: App.$global-black;
-      transition: .6s ease-in-out;
-    }
-  }
-
 }
 
-//.button:hover:not(:disabled) {
-//  transition: .3s ease-in-out;
-//  background: App.$global-grey;
-//}
+.button_dark:hover {
+  &:not(:disabled) {
+    transition: .3s ease-in-out;
+    background: App.$global-grey-opacity;
+  }
+}
 
-//.button:disabled .button__img {
-//  filter: brightness(0.5) invert(0.5);
-//}
-
-//.button__img {
-//  width: 13.453px;
-//  height: 12.813px;
-//  align-items: center;
-//  justify-self: center;
-//}

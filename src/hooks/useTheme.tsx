@@ -1,23 +1,25 @@
-import React from 'react';
+import {useEffect} from 'react';
 import {useAppSelector} from "./redux";
 import {useDispatch} from "react-redux";
 import {toggleTheme} from "../store/reducers/themeSlice";
 
 const UseTheme = () => {
 
-    const {darkMode} = useAppSelector(state => state.themeReducer)
+    const darkMode = useAppSelector(state => state.themeReducer.darkMode)
     const dispatch = useDispatch()
 
     const toggleThemeMode = () => {
         dispatch(toggleTheme());
-        document.body.classList.toggle('dark')
     };
+
+    useEffect(() => {
+        darkMode ? document.body.classList.add('dark') : document.body.classList.remove('dark')
+    }, [darkMode]);
 
     return {
         darkMode,
         toggleThemeMode
     }
-
 };
 
 export default UseTheme;

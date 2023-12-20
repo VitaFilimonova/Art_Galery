@@ -22,7 +22,7 @@ const LocationFilter: React.FC = () => {
     useEffect(() => {
         if (data) {
             dispatch(paintingsSliceTwo.actions.locationFilter({location:  locationFilter}))
-            // dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
         }
     }, [data, locationFilter]);
 

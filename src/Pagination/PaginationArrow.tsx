@@ -12,17 +12,32 @@ interface PaginationArrowsProps {
     handlePageChange: (page: number) => void;
     currentPageNumber: number;
     image: string;
+    isFirst?: boolean;
+    isLast?: boolean;
+    currPage: any;
 }
 
-const PaginationArrow: React.FC<PaginationArrowsProps> = ({handlePageChange, currentPageNumber, image, pageChange}) => {
-    const {currentPage} = useAppSelector(state => state.paginationReducer);
+const PaginationArrow: React.FC<PaginationArrowsProps> = ({
+                                                              handlePageChange,
+                                                              currentPageNumber,
+                                                              image,
+                                                              pageChange,
+                                                              isFirst,
+                                                              isLast,
+                                                              currPage
+                                                          }) => {
+    const firstElem = isFirst ? classes.button_first : ''
+    const lastElem = isLast ? classes.button_last : ''
+
+
     const {darkMode} = useTheme()
     return (
         <>
-            <button className={`${classes.button} ${darkMode ? classes.button_dark : ''}`}
+            <button className={`${classes.button} ${darkMode ? classes.button_dark : ''} ${firstElem || lastElem}`}
                     onClick={() => handlePageChange(pageChange)}
-                    disabled={currentPage === currentPageNumber}>
-                <img src={image} className={classes.button__img} alt={'arrow'}/>
+                    disabled={currPage === currentPageNumber}>
+                <img src={image} className={`${classes.button__img} ${darkMode ? classes.button__img_dark : ''}`}
+                     alt={'arrow'}/>
             </button>
         </>
     );
