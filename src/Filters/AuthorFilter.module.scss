@@ -1,26 +1,31 @@
 @use "./../App";
 @use "src/Cards/Cards.module";
 @forward "./../Cards/Cards.module";
+@use "src/Filters/Filters.module";
+@forward "./../Filters/Filters.module";
 
- .container {
-  width: 265px;
-  height: 45px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.container {
+  @include Filters.filter;
+  //width: 265px;
+  //height: 45px;
+  //position: relative;
+  //display: flex;
+  //align-items: center;
+  //justify-content: space-between;
 
-  box-sizing: border-box;
-  border: 1px solid App.$global-black;
-  border-radius: 8px;
-  background: App.$global-white;
+  //box-sizing: border-box;
+  //border: 1px solid App.$global-black;
+  //border-radius: 8px;
+  //background: App.$global-white;
+  //
+  //@include Cards.font($font-size: 13px, $font-weight: 400);
+  //line-height: normal;
+  //
+  //padding-left: 15px;
 
-  @include Cards.font($font-size: 13px, $font-weight: 400);
-  line-height: normal;
 
-  padding-left: 15px;
   padding-right: 18px;
-  cursor: default;
+  position: relative;
 
   &_open {
     border-radius: 8px 8px 0 0;
@@ -134,3 +139,9 @@
     }
   }
 }
+
+
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;

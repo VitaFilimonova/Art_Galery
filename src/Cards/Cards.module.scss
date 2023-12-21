@@ -4,7 +4,7 @@
   font-size: $font-size;
   font-family: App.$global-font;
   font-style: App.$global-font-style;
-  font-weight:  $font-weight;
+  font-weight: $font-weight;
 }
 
 .cards {
@@ -20,8 +20,9 @@
 
     @include font
   }
+
   &__results_dark {
-   color: App.$global-white;
+    color: App.$global-white;
   }
 
 }
@@ -46,7 +47,7 @@
   padding-top: 5px;
   bottom: -120px;
 
-  @include font ($font-size: 18px);
+  @include font($font-size: 18px);
   line-height: 20px;
   text-transform: capitalize;
 
@@ -54,7 +55,7 @@
 
   &__text {
     color: App.$global-black;
-    @include font ($font-size: 13px, $font-weight: 300);
+    @include font($font-size: 13px, $font-weight: 300);
     line-height: 20px;
     justify-content: space-between;
     display: grid;
@@ -79,4 +80,45 @@ img {
   border-radius: 20px;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+@media screen and (max-width: App.$screen-tab-1150) {
+  .card {
+    width: 300px;
+    height: 230px;
+  }
+}
+
+@media screen and (max-width: App.$screen-tab-970) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    width: 340px;
+    height: 249px;
+  }
+}
+
+@media screen and (max-width: App.$screen-tab-720) {
+  .cards {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .card {
+    width: 360px;
+
+  }
+}
+
+@media screen and (max-width: App.$screen-mobile) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 280px;
+    height: 205px;
+  }
 }

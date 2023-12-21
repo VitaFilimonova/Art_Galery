@@ -1,28 +1,33 @@
 @use "./../App";
 @use "src/Cards/Cards.module";
 @forward "./../Cards/Cards.module";
+@use "src/Filters/Filters.module";
+@forward "./../Filters/Filters.module";
 
 .container {
-  width: 265px;
-  height: 45px;
+  //width: 265px;
+  //height: 45px;
+
+
+  //display: flex;
+  //align-items: center;
+  //justify-content: space-between;
+
+  //box-sizing: border-box;
+  //border: 1px solid App.$global-black;
+  //border-radius: 8px;
+  //background: App.$global-white;
+
+  //@include Cards.font($font-size: 13px, $font-weight: 400);
+  //line-height: normal;
+
+  //padding-left: 15px;
+
+  @include Filters.filter;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  box-sizing: border-box;
-  border: 1px solid App.$global-black;
-  border-radius: 8px;
-  background: App.$global-white;
-
-  @include Cards.font($font-size: 13px, $font-weight: 400);
-  line-height: normal;
-
-  padding-left: 15px;
 
   &_open {
     border-radius: 8px 8px 0 0;
-    border-bottom: 0;
   }
 
   &_dark {
@@ -40,7 +45,7 @@
   position: absolute;
   width: calc(100% + 2px);
   top: calc(100%);
-  height: 95px;
+  height: 105px;
   overflow-y: auto;
   left: -1px;
   z-index: 2;
@@ -54,15 +59,12 @@
     background-color: App.$global-black;
     color: App.$global-white;
     border-color: App.$global-white;
+    border-top: 1px solid App.$global-white;
 
     .options__text, .error_open, {
       color: App.$global-white;
     }
 
-    .input {
-      background-color: App.$global-white;
-      color: App.$global-black;
-    }
 
     .line {
       background-color: App.$global-white;
@@ -88,14 +90,6 @@
   padding: 0 20px;
 }
 
-.input {
-  width: 95px;
-  height: 45px;
-  border-radius: 8px;
-  background: App.$global-grey;
-  padding-left: 10px;
-}
-
 .line {
   width: 12px;
   height: 1px;
@@ -104,25 +98,9 @@
 }
 
 
-.option {
-  padding: 10px 22px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  color: App.$global-black;
-  @include Cards.font($font-size: 16px, $font-weight: 500);
-  line-height: 20px;
-
-  &:hover {
-    background-color: App.$global-black;
-    color: App.$global-white;
-    transition: .6s ease-in-out;
-  }
-}
-
 .error {
-  font-size: 8px;
-  color: black;
+  font-size: 12px;
+  color: red;
   display: none;
   margin-top: 5px;
 
@@ -131,5 +109,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: App.$screen-tab-1150) {
+  .inputs {
+   flex-direction: column;
+    gap: 15px;
+  }
+
+  .options {
+    height: 200px;
+  }
+
+  .error {
+    padding: 5px  5px 0 5px;
+    text-align: center;
+  }
+}
+
+
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;
+
+.input {
+  width: 95px;
+  height: 45px;
+  border-radius: 8px;
+  background: App.$global-grey;
+  padding-left: 10px;
+
+  &_dark {
+    background-color: App.$global-white;
+    color: App.$global-black;
   }
 }

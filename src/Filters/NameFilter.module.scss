@@ -1,6 +1,10 @@
 @use "src/App";
 @use "src/Cards/Cards.module";
 @forward "./../Cards/Cards.module";
+
+@use "src/Filters/Filters.module";
+@forward "./../Filters/Filters.module";
+
 // filter {
 //  box-sizing: border-box;
 //  width: 265px;
@@ -20,22 +24,24 @@
 //  padding-right: 18px;
 //}
 
-.input {
-  width: 265px;
-  height: 45px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-
-  padding-left: 15px;
-  padding-right: 18px;
-  border-radius: 8px;
-  border: 1px solid App.$global-black;
-  background: App.$global-white;
-
-  @include Cards.font($font-size: 13px, $font-weight: 400);
-  line-height: normal;
+.container {
+  //width: 265px;
+  //height: 45px;
+  //display: flex;
+  //justify-content: space-between;
+  //align-items: center;
+  //box-sizing: border-box;
+  //
+  //padding-left: 15px;
+  //padding-right: 18px;
+  //border-radius: 8px;
+  //border: 1px solid App.$global-black;
+  //background: App.$global-white;
+  //
+  //@include Cards.font($font-size: 13px, $font-weight: 400);
+  //line-height: normal;
+  @include Filters.filter;
+  padding-right: 15px;
 
   &::placeholder {
     color: App.$global-black;
@@ -51,6 +57,13 @@
     color: App.$global-white;
   }
 }
+
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;
+
+
 
 //.filter_button {
 //  //width: 20px;

@@ -20,14 +20,14 @@ const NameFilter: React.FC = () => {
     }, [data, nameFilter]);
 
     return (
-        <div>
+        <>
             <input type="text"
                    placeholder="Name"
                    value={nameFilter}
                    onChange={event => setNameFilter(event.target.value)}
-                   className={`${classes.input} ${darkMode ? classes.input_dark : ''}`}
+                   className={`${classes.container} ${darkMode ? classes.container_dark : ''}`}
             />
-        </div>
+        </>
     );
 }
 
