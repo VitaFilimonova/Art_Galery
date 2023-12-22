@@ -40,5 +40,3 @@ export const locationsSlice = createSlice({
         },
     }
 })
-
-export default locationsSlice.reducer

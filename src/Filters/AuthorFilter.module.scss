@@ -6,23 +6,6 @@
 
 .container {
   @include Filters.filter;
-  //width: 265px;
-  //height: 45px;
-  //position: relative;
-  //display: flex;
-  //align-items: center;
-  //justify-content: space-between;
-
-  //box-sizing: border-box;
-  //border: 1px solid App.$global-black;
-  //border-radius: 8px;
-  //background: App.$global-white;
-  //
-  //@include Cards.font($font-size: 13px, $font-weight: 400);
-  //line-height: normal;
-  //
-  //padding-left: 15px;
-
 
   padding-right: 18px;
   position: relative;
@@ -37,39 +20,6 @@
     border-color: App.$global-white;
   }
 }
-
-
-//.container__buttons {
-//  align-items: center;
-//  justify-content: space-between;
-//  display: flex;
-//  width: 25px;
-//  z-index: 5;
-//}
-//
-//.clear_btn__hide {
-//  visibility: hidden;
-//}
-//
-//.container__arrow {
-//  //background: App.$global-white;
-//  width: 10px;
-//  height: 6px;
-//  cursor: pointer;
-//
-//  &_img {
-//    width: 10px;
-//    height: 6px;
-//
-//    transition: .3s ease-in-out;
-//  }
-//
-//  &_img__open {
-//    rotate: 180deg;
-//    transition: .3s ease-in-out;
-//  }
-//}
-
 
 .options {
   width: calc(100% + 2px);

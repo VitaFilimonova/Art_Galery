@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import classes from "./Cards.module.scss";
+import classes from "./CardItem.module.scss";
 import { IPaintings} from "../models/IPaintings";
 
 interface CardItemProps {

@@ -4,25 +4,8 @@
 @use "src/Filters/Filters.module";
 @forward "./../Filters/Filters.module";
 
+
 .container {
-  //width: 265px;
-  //height: 45px;
-
-
-  //display: flex;
-  //align-items: center;
-  //justify-content: space-between;
-
-  //box-sizing: border-box;
-  //border: 1px solid App.$global-black;
-  //border-radius: 8px;
-  //background: App.$global-white;
-
-  //@include Cards.font($font-size: 13px, $font-weight: 400);
-  //line-height: normal;
-
-  //padding-left: 15px;
-
   @include Filters.filter;
   position: relative;
 
@@ -35,7 +18,6 @@
     color: App.$global-white;
     border-color: App.$global-white;
   }
-
 }
 
 .options {
@@ -61,10 +43,13 @@
     border-color: App.$global-white;
     border-top: 1px solid App.$global-white;
 
-    .options__text, .error_open, {
+    .options__text {
       color: App.$global-white;
     }
 
+    .error_open {
+      color: App.$global-red;
+    }
 
     .line {
       background-color: App.$global-white;
@@ -100,7 +85,7 @@
 
 .error {
   font-size: 12px;
-  color: red;
+  color: App.$global-red;
   display: none;
   margin-top: 5px;
 
@@ -111,6 +96,11 @@
     justify-content: center;
   }
 }
+
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;
 
 @media screen and (max-width: App.$screen-tab-1150) {
   .inputs {
@@ -125,24 +115,5 @@
   .error {
     padding: 5px  5px 0 5px;
     text-align: center;
-  }
-}
-
-
-@include Filters.container-screen-tab-1150;
-@include Filters.container-screen-tab-970;
-@include Filters.container-screen-tab-720;
-@include Filters.container-screen-mobile;
-
-.input {
-  width: 95px;
-  height: 45px;
-  border-radius: 8px;
-  background: App.$global-grey;
-  padding-left: 10px;
-
-  &_dark {
-    background-color: App.$global-white;
-    color: App.$global-black;
   }
 }

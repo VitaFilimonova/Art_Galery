@@ -9,7 +9,7 @@ const useVariables = () => {
         locationFilter,
         startDateFilter,
         endDateFilter
-    } = useAppSelector(state => state.paintingsTwoReducer)
+    } = useAppSelector(state => state.paintingsReducer)
 
     const {data} = cardsApi.useGetNameFilterQuery({
         name: nameFilter,
@@ -20,6 +20,7 @@ const useVariables = () => {
         page: currentPage,
         limit: limit
     })
+
     const {data: dataWithoutLimit} = cardsApi.useGetNameFilterQuery({
         name: nameFilter,
         authorId: authorFilter,

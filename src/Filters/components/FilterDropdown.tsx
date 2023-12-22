@@ -3,7 +3,7 @@ import classes from "./../AuthorFilter.module.scss";
 import { useDispatch } from "react-redux";
 import useTheme from "../../hooks/useTheme";
 import useVariables from "../../hooks/useVariables";
-import {paintingsSliceTwo} from "../../store/reducers/paintingsSlice1";
+import {paintingsSlice} from "../../store/reducers/paintingsSlice";
 import ButtonGroup from "./ButtonGroup";
 
 
@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps<any>> = ({ filterData, filterKey }) => {
             location: undefined,
         };
         payload[filterKey] = value;
-        dispatch(paintingsSliceTwo.actions[`${filterKey}Filter`](payload));
+        dispatch(paintingsSlice.actions[`${filterKey}Filter`](payload));
     };
 
     const [selectedFilter, setSelectedFilter] = useState<number | undefined>(undefined);
@@ -35,7 +35,7 @@ const Filter: React.FC<FilterProps<any>> = ({ filterData, filterKey }) => {
 
     useEffect(() => {
         if (data) {
-            dispatch(paintingsSliceTwo.actions.filterAction({ paintingsus: data }));
+            dispatch(paintingsSlice.actions.filterAction({ paintingsus: data }));
         }
     }, [data, selectedFilter, filterKey]);
 

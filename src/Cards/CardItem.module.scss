@@ -1,0 +1,47 @@
+@use "src/App";
+@use "./Cards.module";
+
+.card {
+  width: 360px;
+  height: 275px;
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.description {
+  width: 360px;
+  height: 145px;
+  position: absolute;
+  background: rgba(App.$global-white, 0.75);
+  padding-left: 15px;
+  padding-top: 5px;
+  bottom: -120px;
+
+  @include Cards.font($font-size: 18px);
+  line-height: 20px;
+  text-transform: capitalize;
+
+  transition: 1s ease-in-out;
+
+  &__text {
+    color: App.$global-black;
+    @include Cards.font($font-size: 13px, $font-weight: 300);
+    line-height: 20px;
+    justify-content: space-between;
+    display: grid;
+    grid-gap: 5px;
+    padding-top: 6px;
+
+    &_elem::before {
+      content: attr(data-label);
+      font-weight: 500;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-120px);
+    transition: 1s linear, 1s ease-in-out;
+  }
+}

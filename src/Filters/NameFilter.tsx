@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import classes from "./NameFilter.module.scss";
 import {useDispatch} from "react-redux";
-import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
+import {paintingsSlice} from "../store/reducers/paintingsSlice";
 import useTheme from "../hooks/useTheme";
 import useVariables from "../hooks/useVariables";
 
@@ -14,8 +14,8 @@ const NameFilter: React.FC = () => {
 
     useEffect(() => {
         if (data) {
-            dispatch(paintingsSliceTwo.actions.nameFilter({name: nameFilter}));
-            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}));
+            dispatch(paintingsSlice.actions.nameFilter({name: nameFilter}));
+            dispatch(paintingsSlice.actions.filterAction({paintingsus: data}));
         }
     }, [data, nameFilter]);
 

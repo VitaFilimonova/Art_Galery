@@ -23,11 +23,6 @@ const Input: React.FC<InputProps> = ({id, placeholder, value, dateSetFilter, set
             setErrorFilter(true)
         }
     }
-    useEffect(() => {
-        if (value) {
-            dateSet(value);
-        }
-    }, [value, dateSet]);
 
     return (
         <>

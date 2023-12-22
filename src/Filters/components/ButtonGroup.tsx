@@ -12,13 +12,13 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({setFilter, setFilterName, filterName, isOpen}) => {
-
     const clearFilter = () => {
         if (setFilter && setFilterName) {
             setFilter();
             setFilterName();
         }
     }
+
     const {darkMode} = useTheme()
     return (
         <div className={classes.buttons}>

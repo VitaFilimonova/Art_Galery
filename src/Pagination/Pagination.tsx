@@ -14,9 +14,9 @@ import PaginationArrow from "./PaginationArrow";
 
 const Pagination: React.FC = () => {
     const limit = useAppSelector(state => state.paginationReducer.limit)
-    const {data, isLoading} = useGetPaintingsQuery({limit})
+    const {data} = useGetPaintingsQuery({limit})
     const {currentPage, totalPages} = useAppSelector(state => state.paginationReducer);
-    const activeFilter = useAppSelector(state => state.paintingsTwoReducer.activeFilter);
+    const activeFilter = useAppSelector(state => state.paintingsReducer);
     const dispatch = useAppDispatch();
     const {darkMode} = useTheme()
     const {dataWithoutLimit} = useVariables()
@@ -86,40 +86,3 @@ const Pagination: React.FC = () => {
 };
 
 export default Pagination;
-
-
-{/*<button className={classes.button_arrow} onClick={() => handlePageChange(1)}*/
-}
-{/*        disabled={currentPage === 1}>*/
-}
-{/*    <img src={doubleArrLeft} className={classes.button_img} alt={'doubleArrowLeft'}/>*/
-}
-{/*</button>*/
-}
-{/*<button className={classes.button_arrow} onClick={() => handlePageChange(currentPage - 1)}*/
-}
-{/*        disabled={currentPage === 1}>*/
-}
-{/*    <img src={arrLeft} className={classes.button_img} alt={'arrowLeft'}/>*/
-}
-{/*</button>*/
-}
-
-
-{/*<button className={classes.button_arrow} onClick={() => handlePageChange(currentPage + 1)}*/
-}
-{/*        disabled={currentPage === totalPages}>*/
-}
-{/*    <img src={arrRight} className={classes.button_img} alt={'arrowRight'}/>*/
-}
-{/*</button>*/
-}
-
-{/*<button className={classes.button_arrow} onClick={() => handlePageChange(totalPages)}*/
-}
-{/*        disabled={currentPage === totalPages}>*/
-}
-{/*    <img src={doubleArrRight} className={classes.button_img} alt={'doubleArrowRight'}/>*/
-}
-{/*</button>*/
-}

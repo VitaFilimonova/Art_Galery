@@ -10,12 +10,11 @@ import Pagination from "./Pagination/Pagination";
 
 
 function App() {
+
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(fetchAllCards());
     }, []);
-
-    const { darkMode } = useAppSelector(state => state.themeReducer);
 
     return (
         <div className={'App'}>

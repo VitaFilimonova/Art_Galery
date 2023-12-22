@@ -4,13 +4,11 @@ import CardItem from "./CardItem";
 import { useAppSelector} from "../hooks/redux";
 import useTheme from "../hooks/useTheme";
 
-
 const Cards = () => {
 
     const {authors} = useAppSelector(state => state.authorsReducer)
     const {locations} = useAppSelector(state => state.locationsReducer)
-    // const {paintings: cards} = useAppSelector(state => state.paintingsReducer)
-    const {paintings: cards} = useAppSelector(state => state.paintingsTwoReducer)
+    const {paintings: cards} = useAppSelector(state => state.paintingsReducer)
     const { darkMode } = useTheme();
 
     return (

@@ -5,7 +5,7 @@ import {useAppSelector} from "../hooks/redux";
 import useTheme from "../hooks/useTheme";
 import ButtonGroup from "./components/ButtonGroup";
 import useVariables from "../hooks/useVariables";
-import {paintingsSliceTwo} from "../store/reducers/paintingsSlice1";
+import {paintingsSlice} from "../store/reducers/paintingsSlice";
 
 
 
@@ -21,8 +21,8 @@ const LocationFilter: React.FC = () => {
 
     useEffect(() => {
         if (data) {
-            dispatch(paintingsSliceTwo.actions.locationFilter({location:  locationFilter}))
-            dispatch(paintingsSliceTwo.actions.filterAction({paintingsus: data}))
+            dispatch(paintingsSlice.actions.locationFilter({location:  locationFilter}))
+            dispatch(paintingsSlice.actions.filterAction({paintingsus: data}))
         }
     }, [data, locationFilter]);
 
