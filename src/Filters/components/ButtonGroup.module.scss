@@ -1,0 +1,29 @@
+@use "./../../App";
+
+.buttons {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  width: 25px;
+}
+
+.button__clear_hide {
+  visibility: hidden;
+}
+
+.arrow {
+  width: 10px;
+  height: 6px;
+  cursor: pointer;
+
+  &__img {
+    width: 10px;
+    height: 6px;
+    transition: 0.3s ease-in-out;
+
+    &_open {
+      rotate: 180deg;
+      transition: 0.3s ease-in-out;
+    }
+  }
+}

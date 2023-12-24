@@ -1,30 +1,27 @@
-import React, {useEffect} from 'react';
-import './App.scss';
-import './reset.scss';
+import React, { useEffect } from "react";
+import "./App.scss";
+import "./reset.scss";
 import Cards from "./Cards/Cards";
 import Header from "./Header/Header";
 import Filters from "./Filters/Filters";
-import {useAppDispatch, useAppSelector} from "./hooks/redux";
-import {fetchAllCards} from "./store/reducers/ActionCreatorsAll";
+import { useAppDispatch } from "./hooks/redux";
+import { fetchAllCards } from "./store/reducers/ActionCreatorsAll";
 import Pagination from "./Pagination/Pagination";
 
-
 function App() {
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(fetchAllCards());
-    }, []);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllCards());
+  }, []);
 
-    const { darkMode } = useAppSelector(state => state.themeReducer);
-
-    return (
-        <div className={'App'}>
-            <Header/>
-            <Filters/>
-            <Cards/>
-            <Pagination/>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Header />
+      <Filters />
+      <Cards />
+      <Pagination />
+    </div>
+  );
 }
 
 export default App;

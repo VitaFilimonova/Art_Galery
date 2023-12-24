@@ -4,7 +4,7 @@
   font-size: $font-size;
   font-family: App.$global-font;
   font-style: App.$global-font-style;
-  font-weight:  $font-weight;
+  font-weight: $font-weight;
 }
 
 .cards {
@@ -18,59 +18,12 @@
     align-self: center;
     justify-self: center;
 
-    @include font
+    @include font;
   }
+
   &__results_dark {
-   color: App.$global-white;
+    color: App.$global-white;
   }
-
-}
-
-
-.card {
-  width: 360px;
-  height: 275px;
-  display: flex;
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-
-.description {
-  width: 360px;
-  height: 145px;
-  position: absolute;
-  background: rgba(App.$global-white, 0.75);
-  padding-left: 15px;
-  padding-top: 5px;
-  bottom: -120px;
-
-  @include font ($font-size: 18px);
-  line-height: 20px;
-  text-transform: capitalize;
-
-  transition: 1s ease-in-out;
-
-  &__text {
-    color: App.$global-black;
-    @include font ($font-size: 13px, $font-weight: 300);
-    line-height: 20px;
-    justify-content: space-between;
-    display: grid;
-    grid-gap: 5px;
-    padding-top: 6px;
-  }
-
-  &:hover {
-    transform: translateY(-120px);
-    transition: 1s linear, 1s ease-in-out;
-  }
-}
-
-.description__text_elem::before {
-  content: attr(data-label);
-  font-weight: 500;
 }
 
 img {
@@ -79,4 +32,44 @@ img {
   border-radius: 20px;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+@media screen and (max-width: App.$screen-tab-1150) {
+  .card {
+    width: 300px;
+    height: 230px;
+  }
+}
+
+@media screen and (max-width: App.$screen-tab-970) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    width: 340px;
+    height: 249px;
+  }
+}
+
+@media screen and (max-width: App.$screen-tab-720) {
+  .cards {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .card {
+    width: 360px;
+  }
+}
+
+@media screen and (max-width: App.$screen-mobile) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 280px;
+    height: 205px;
+  }
 }

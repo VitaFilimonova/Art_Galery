@@ -1,44 +1,34 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from "./NameFilter.module.scss";
-import {cardsApi} from "../services/CardsServise";
-import {useDispatch} from "react-redux";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
-import {useAppSelector} from "../hooks/redux";
+import { paintingsSlice } from "../store/reducers/paintingsSlice";
 import useTheme from "../hooks/useTheme";
-
+import useVariables from "../hooks/useVariables";
 
 const NameFilter: React.FC = () => {
-    const [nameFilter, setNameFilter] = useState<string | undefined>(undefined)
-    const dispatch = useDispatch()
-    const {authorFilter, locationFilter, startDateFilter,endDateFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({name: nameFilter, authorId: authorFilter, locationId: locationFilter, startDate: startDateFilter, endDate: endDateFilter, page: currentPage, limit: limit})
-const {darkMode} = useTheme()
+  const [nameFilter, setNameFilter] = useState<string | undefined>(undefined);
+  const { darkMode } = useTheme();
+  const { data } = useVariables();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
+  useEffect(() => {
+    if (data) {
+      dispatch(paintingsSlice.actions.nameFilter({ name: nameFilter }));
+      dispatch(paintingsSlice.actions.filterAction({ paintings: data }));
+    }
+  }, [data, nameFilter]);
 
-        if (data) {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                author: authorFilter,
-                location: locationFilter,
-                name: nameFilter,
-            }))
-
-console.log(nameFilter)
-        }
-    }, [data, authorFilter,locationFilter, nameFilter]);
-
-    return (
-        <div>
-            <input type="text"
-                   placeholder="Name"
-                   value={nameFilter}
-                   onChange={event => setNameFilter(event.target.value)}
-                   className={`${classes.input} ${darkMode ? classes.input_dark   : ''}`}
-            />
-        </div>
-    );
-}
+  return (
+    <input
+      type="text"
+      placeholder="Name"
+      value={nameFilter}
+      onChange={(event) => setNameFilter(event.target.value)}
+      className={`${classes.container} ${
+        darkMode ? classes.container_dark : ""
+      }`}
+    />
+  );
+};
 
 export default NameFilter;

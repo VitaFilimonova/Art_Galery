@@ -1,93 +1,79 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from "./AuthorFilter.module.scss";
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "../hooks/redux";
-import {cardsApi} from "../services/CardsServise";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
-import arrow from "../pictures/selectArrow.svg";
+import { useAppSelector } from "../hooks/redux";
 import useTheme from "../hooks/useTheme";
-
-
+import ButtonGroup from "./components/ButtonGroup";
+import useVariables from "../hooks/useVariables";
+import { paintingsSlice } from "../store/reducers/paintingsSlice";
 
 const LocationFilter: React.FC = () => {
-    const [locationFilter, setLocationFilter] = useState<number | undefined>(undefined)
-    const [locationFilterName, setLocationFilterName] = useState<string | undefined>(undefined)
-    const [isOpen, setIsOpen] = useState(false)
+  const [locationFilter, setLocationFilter] = useState<number | undefined>(
+    undefined,
+  );
+  const [locationFilterName, setLocationFilterName] = useState<
+    string | undefined
+  >(undefined);
+  const [isOpen, setIsOpen] = useState(false);
+  const { locations } = useAppSelector((state) => state.locationsReducer);
+  const dispatch = useDispatch();
+  const { darkMode } = useTheme();
+  const { data } = useVariables();
 
-
-    const dispatch = useDispatch()
-    const {nameFilter, authorFilter, startDateFilter, endDateFilter} = useAppSelector(state => state.paintingsReducer)
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {data} = cardsApi.useGetNameFilterQuery({
-        name: nameFilter,
-        authorId: authorFilter,
-        locationId: locationFilter,
-        startDate: startDateFilter, endDate: endDateFilter,
-        page: currentPage,
-        limit: limit
-    })
-
-    useEffect(() => {
-
-        if (data) {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                author: authorFilter,
-                name: nameFilter,
-                location: locationFilter
-            }))
-        }
-    }, [data, authorFilter, nameFilter, locationFilter]);
-
-    const {locations} = useAppSelector(state => state.locationsReducer)
-    const {darkMode} = useTheme()
-
-    const handleOptionClick = (locationId: number, locationName: string) => {
-
-        setLocationFilter(locationId);
-        setLocationFilterName(locationName);
-
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        paintingsSlice.actions.locationFilter({ location: locationFilter }),
+      );
+      dispatch(paintingsSlice.actions.filterAction({ paintings: data }));
     }
-    const clearLocationFilter = () => {
+  }, [data, locationFilter]);
 
-        setLocationFilter(undefined)
-        setLocationFilterName(undefined)
+  const handleOptionClick = (locationId: number, locationName: string) => {
+    setLocationFilter(locationId);
+    setLocationFilterName(locationName);
+  };
 
-    }
+  return (
+    <div
+      className={`${classes.container} ${
+        isOpen ? classes.container_open : ""
+      } ${darkMode ? classes.container_dark : ""}`}
+      onBlur={() => setIsOpen(false)}
+      onClick={() => setIsOpen((prevState) => !prevState)}
+      tabIndex={0}
+      role="button"
+    >
+      <span className={classes.name}>{locationFilterName || "Location"}</span>
 
-    return (
+      <ButtonGroup
+        isOpen={isOpen}
+        filterName={locationFilterName}
+        setFilter={() => setLocationFilter(undefined)}
+        setFilterName={() => setLocationFilterName(undefined)}
+      />
 
-        <div className={`${classes.container} ${isOpen ? classes.container_open : ''} ${darkMode ? classes.container_dark : ''}`}
-             onBlur={() => setIsOpen(false)}
-             tabIndex={0}
-             onClick={() => setIsOpen(prevState => !prevState)}>
-
-            <span className={classes.name}>{locationFilterName ? locationFilterName : 'Location'}</span>
-
-            <div className={classes.container__buttons}>
-
-                <button
-                    className={`${classes.clear_btn} ${locationFilterName == undefined ? classes.clear_btn__hide : ''}`}
-                    onClick={event => {
-                        event.stopPropagation()
-                        clearLocationFilter()
-                    }}
-                >
-                    &times;</button>
-
-                <div className={classes.container__arrow}>
-                    <img src={arrow}  className={`${classes.container__arrow_img} ${isOpen ? classes.container__arrow_img_open : ''}`}/>
-                </div>
-            </div>
-
-            <ul className={`${classes.options} ${isOpen ? classes.options_open : ''} ${darkMode ? classes.options_dark : ''}`}>
-                {locations?.map((location) =>
-                    <li value={location.id} key={location.id} className={`${classes.option}  ${darkMode ? classes.option_dark : ''}`}
-                        onClick={() => handleOptionClick(location.id, location.location)}> {location.location} </li>)
-                }
-            </ul>
-        </div>
-    );
+      <ul
+        className={`${classes.options} ${isOpen ? classes.options_open : ""} ${
+          darkMode ? classes.options_dark : ""
+        }`}
+      >
+        {locations?.map((location) => (
+          <li
+            value={location.id}
+            key={location.id}
+            className={`${classes.option}  ${
+              darkMode ? classes.option_dark : ""
+            }`}
+            onClick={() => handleOptionClick(location.id, location.location)}
+            role="presentation"
+          >
+            {location.location}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default LocationFilter;

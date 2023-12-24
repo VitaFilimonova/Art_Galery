@@ -1,23 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 $global-white: #ffffff;
+$global-grey: #ededed;
+$global-grey-opacity: #464646;
 $global-black: #000000;
+$global-red: #ff0000;
 $global-font: Roboto, serif;
 $global-font-style: normal;
-
-.App {
-    /*display: grid;*/
-    margin: 0 auto;
-    /*align-items: center;*/
-    width: 1120px;
-}
-
-
+$screen-mobile: 400px;
+$screen-tab-720: 720px;
+$screen-tab-970: 970px;
+$screen-tab-1150: 1150px;
+$screen-tab-1366: 1366px;
 
 body {
-    background-color: $global-white;
+  background-color: $global-white;
 }
 
 .dark {
-        background-color: $global-black;
+  background-color: $global-black;
+}
+
+.App {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  //justify-content: center;
+  width: 1120px;
+  //max-width: 1366px;
+}
+
+@media screen and (max-width: $screen-tab-1150) {
+  .App {
+    width: 940px;
+  }
+}
+@media screen and (max-width: $screen-tab-970) {
+  .App {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: $screen-tab-720) {
+  .App {
+    width: 550px;
+  }
+}
+
+@media screen and (max-width: $screen-mobile) {
+  .App {
+    width: 280px;
+  }
 }

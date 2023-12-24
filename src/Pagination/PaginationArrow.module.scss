@@ -1,0 +1,56 @@
+@use "src/App";
+
+.button {
+  display: flex;
+  width: 41px;
+  height: 41px;
+  border: 1px solid #000;
+  border-right: none;
+  background: App.$global-white;
+  align-items: center;
+  justify-content: center;
+
+  &__img {
+    width: 13px;
+    height: 12px;
+
+    &_dark {
+      filter: brightness(0.5) invert(1.5);
+    }
+  }
+
+  &_dark {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    border-color: App.$global-white;
+
+    &.button_last {
+      border: 1px solid App.$global-white;
+    }
+  }
+
+  &_first {
+    border-radius: 10px 0 0 10px;
+  }
+
+  &_last {
+    border-right: 1px solid App.$global-black;
+    border-radius: 0 10px 10px 0;
+  }
+
+  &:hover:not(:disabled) {
+    transition: 0.3s ease-in-out;
+    background: App.$global-grey;
+  }
+
+  &:disabled .button__img {
+    filter: brightness(0.5) invert(0.5);
+  }
+}
+
+.button_dark:hover {
+  &:not(:disabled) {
+    transition: 0.3s ease-in-out;
+    background: App.$global-grey-opacity;
+  }
+}

@@ -1,26 +1,14 @@
 @use "./../App";
 @use "src/Cards/Cards.module";
 @forward "./../Cards/Cards.module";
+@use "src/Filters/Filters.module";
+@forward "./../Filters/Filters.module";
 
- .container {
-  width: 265px;
-  height: 45px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.container {
+  @include Filters.filter;
 
-  box-sizing: border-box;
-  border: 1px solid #000;
-  border-radius: 8px;
-  background: App.$global-white;
-
-  @include Cards.font($font-size: 13px, $font-weight: 400);
-  line-height: normal;
-
-  padding-left: 15px;
   padding-right: 18px;
-  cursor: default;
+  position: relative;
 
   &_open {
     border-radius: 8px 8px 0 0;
@@ -32,38 +20,6 @@
     border-color: App.$global-white;
   }
 }
-
-
-.container__buttons {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 25px;
-}
-
-.clear_btn__hide {
-  visibility: hidden;
-}
-
-.container__arrow {
-  background: App.$global-white;
-  width: 10px;
-  height: 6px;
-  cursor: pointer;
-
-  &_img {
-    width: 10px;
-    height: 6px;
-    z-index: 10;
-    transition: .3s ease-in-out;
-  }
-
-  &_img__open {
-    rotate: 180deg;
-    transition: .3s ease-in-out;
-  }
-}
-
 
 .options {
   width: calc(100% + 2px);
@@ -78,7 +34,7 @@
   background-color: App.$global-white;
   border-radius: 0 0 8px 8px;
   border: 1px solid App.$global-black;
-  border-top: 1px solid rgba(App.$global-black, 0.30);
+  border-top: 1px solid rgba(App.$global-black, 0.3);
 
   top: calc(100%);
   left: -1px;
@@ -93,7 +49,6 @@
   &_dark {
     border: 1px solid App.$global-white;
     background-color: App.$global-black;
-
   }
 
   &::-webkit-scrollbar {
@@ -101,11 +56,10 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #7B7B7B;
+    background: #7b7b7b;
     border-radius: 10px;
   }
 }
-
 
 .option {
   align-items: center;
@@ -116,22 +70,25 @@
   padding: 10px 22px;
   cursor: pointer;
 
-  &_dark {
-    color: App.$global-white;
-    background-color: App.$global-black;
-  }
-  &_dark:hover {
-    background-color: App.$global-white;
-    color: App.$global-black;
-    transition: .6s ease-in-out;
-    position: initial;
-  }
-
-
   &:hover {
     background-color: App.$global-black;
     color: App.$global-white;
-    transition: .6s ease-in-out;
-    position: initial;
+    transition: 0.6s ease-in-out;
+  }
+
+  &_dark {
+    color: App.$global-white;
+    background-color: App.$global-black;
+
+    &:hover {
+      background-color: App.$global-white;
+      color: App.$global-black;
+      transition: 0.6s ease-in-out;
+    }
   }
 }
+
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;

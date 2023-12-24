@@ -1,116 +1,110 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from "./DateFilter.module.scss";
-import arrow from "../pictures/selectArrow.svg";
-import {useDispatch} from "react-redux";
-import {cardsApi} from "../services/CardsServise";
-import {useAppSelector} from "../hooks/redux";
-import {paintingsSlice} from "../store/reducers/paintingsSlice";
+import useTheme from "../hooks/useTheme";
+import ButtonGroup from "./components/ButtonGroup";
+import useVariables from "../hooks/useVariables";
+import { paintingsSlice } from "../store/reducers/paintingsSlice";
+import Input from "./components/Input";
 
+const DateFilter: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [startDateFilter, setStartDateFilter] = useState<string | undefined>(
+    undefined,
+  );
+  const [endDateFilter, setEndDateFilter] = useState<string | undefined>(
+    undefined,
+  );
+  const dispatch = useDispatch();
+  const { data } = useVariables();
+  const { darkMode } = useTheme();
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-const DateFilter: React.FC= () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
-    const [inputValueStart, setInputValueStart] = useState<string | undefined>(undefined);
-    const [inputValueEnd, setInputValueEnd] = useState<string | undefined>(undefined);
-    const  dispatch = useDispatch()
-    const {currentPage, limit} = useAppSelector(state => state.paginationReducer)
-    const {nameFilter, authorFilter,  locationFilter} = useAppSelector(state => state.paintingsReducer)
-    const {data} =  cardsApi.useGetNameFilterQuery({ name:nameFilter, authorId: authorFilter, locationId: locationFilter, startDate: inputValueStart, endDate: inputValueEnd, page: currentPage, limit: limit})
-
-    useEffect(() => {
-
-        if (data && inputValueStart !== '' && inputValueEnd !== '') {
-            dispatch(paintingsSlice.actions.filterAction({
-                paintingsus: data,
-                author: authorFilter,
-                name: nameFilter,
-                location: locationFilter,
-                startDate: inputValueStart,
-                endDate: inputValueEnd}))
-        }
-    }, [ data, authorFilter, nameFilter, locationFilter, inputValueStart, inputValueEnd]);
-
-
-    const dataSetStart = (start: string | undefined) => {
-
-        if ( start && start.length == 4) {
-            setInputValueStart(start)
-            setError(false)
-            checkError()
-        } else {
-            setInputValueStart(undefined)
-            setError(true)
-        }
-
+  useEffect(() => {
+    if (data) {
+      dispatch(paintingsSlice.actions.filterAction({ paintings: data }));
+      dispatch(
+        paintingsSlice.actions.dateFilter({
+          startDate: startDateFilter,
+          endDate: endDateFilter,
+        }),
+      );
     }
-    const dataSetEnd = ( end: string | undefined) => {
-
-        if ( end && end.length == 4) {
-            setInputValueEnd(end)
-            setError(false)
-            checkError()
-
-        } else {
-            setInputValueEnd(undefined)
-            setError(true)
-
-        }
-
+    if (startDateFilter && endDateFilter) {
+      startDateFilter > endDateFilter ? setError(true) : setError(false);
     }
+  }, [data, startDateFilter, endDateFilter]);
 
-    const checkError =( ) => {
-        if ( inputValueStart != undefined && inputValueEnd != undefined) {
-            console.log('spsps')
-            if (+ inputValueStart > +inputValueEnd) {
-                setError(true)
-            }
-        }
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
 
-    }
+    document.addEventListener("click", handleDocumentClick);
 
-    return (
-        <div  className={`${classes.container} ${isOpen ? classes.container__open : ''}`}
-            // onBlur={()=> setIsOpen(false)}
-            // onFocus={()=> setIsOpen(false)}
-              tabIndex={0}
-              onClick={()=> {setIsOpen(prevState => !prevState);
-              }}>
-            <span className={classes.name}>Created</span>
-            <div className={classes.buttons}>
-                <div className={classes.carette} >
-                    <img src={arrow} className={`${classes.carette_img} ${isOpen ? classes.carette_img__open : ''}`} />
-                </div>
-            </div>
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
 
-            <div className={`${classes.options} ${isOpen ? classes.show : ''}`}>
-                <div className={classes.text}>Write a 4-digit date number</div>
-                <div className={classes.inputs}>
-                    <input id={'start'}
-                        // type='text'
-                           placeholder={'from'}
-                           className={classes.input}
-                           value={inputValueStart}
-                           onClick={(event) => event.stopPropagation()}
-                           onChange={(event) => dataSetStart(event.target.value)}
-                    >
-                    </input>
-                    <span className={classes.line}></span>
-                    <input id={'end'}
-                           placeholder={'before'}
-                           className={classes.input}
-                           value={inputValueEnd}
-                           onClick={(event) => event.stopPropagation()}
-                           onChange={(event) => dataSetEnd(event.target.value)}
-                    >
-                    </input>
-                </div>
-                <div className={`${classes.error} ${error ? classes.error_show : ''}`}>
-                    Please write the end date later than the start date or check data length
-                </div>
+  return (
+    <div
+      className={`${classes.container} ${
+        isOpen ? classes.container_open : ""
+      } ${darkMode ? classes.container_dark : ""}`}
+      ref={containerRef}
+      onClick={() => {
+        setIsOpen((prevState) => !prevState);
+      }}
+      tabIndex={0}
+      role="button"
+    >
+      <span className={classes.name}>Created</span>
 
-            </div>
+      <ButtonGroup isOpen={isOpen} />
+
+      <div
+        className={`${classes.options} ${isOpen ? classes.options_open : ""} ${
+          darkMode ? classes.options_dark : ""
+        }`}
+      >
+        <div className={classes.options__text}>Enter a 4-digit number date</div>
+        <div className={classes.inputs}>
+          <Input
+            id="start"
+            placeholder="from"
+            value={startDateFilter}
+            dateSetFilter={setStartDateFilter}
+            setErrorFilter={setError}
+          />
+
+          <span className={classes.line} />
+
+          <Input
+            id="end"
+            placeholder="before"
+            value={endDateFilter}
+            dateSetFilter={setEndDateFilter}
+            setErrorFilter={setError}
+          />
         </div>
-    );
+
+        <div
+          className={`${classes.error} ${error ? classes.error_open : ""} ${
+            darkMode ? classes.error_dark : ""
+          }`}
+        >
+          Invalid date, please, revise it
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DateFilter;

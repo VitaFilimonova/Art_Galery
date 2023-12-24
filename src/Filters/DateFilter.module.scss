@@ -1,141 +1,117 @@
+@use "./../App";
+@use "src/Cards/Cards.module";
+@forward "./../Cards/Cards.module";
+@use "src/Filters/Filters.module";
+@forward "./../Filters/Filters.module";
 
 .container {
-
+  @include Filters.filter;
   position: relative;
-  width: 265px;
-  box-sizing: border-box;
-  border: 1px solid #000;
-  border-radius: 8px;
-  background: #FFF;
-  font-family: Roboto, serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  align-items: center;
-  padding-left: 15px;
-  display: flex;
-  justify-content: space-between;
-  height: 45px;
 
-}
+  &_open {
+    border-radius: 8px 8px 0 0;
+  }
 
-.container__open {
-  border-radius: 8px 8px 0 0;
-  border-bottom: 0;
-}
-
-.buttons {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 25px;
-
-}
-
-.carette {
-  background: white;
-  width: 10px;
-  height: 6px;
-  cursor: pointer;
-
-}
-.carette_img {
-  width: 10px;
-  height: 6px;
-  z-index: 10;
-  transition: .3s ease-in-out ;
-}
-
-.carette_img__open {
-  rotate:  180deg ;
-  transition: .3s ease-in-out;
+  &_dark {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    border-color: App.$global-white;
+  }
 }
 
 .options {
   display: none;
-justify-content: center;
-  align-content: center;
+  justify-content: center;
   align-items: center;
   position: absolute;
-  width: calc(100% + 2px );
+  width: calc(100% + 2px);
   top: calc(100%);
-  height: 95px;
+  height: 105px;
   overflow-y: auto;
   left: -1px;
   z-index: 2;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 0 0 8px 8px;
   border: 1px solid #000;
   border-top: 0 transparent;
   flex-direction: column;
-}
 
-.options.show {
-  display: flex;
+  &_dark {
+    background-color: App.$global-black;
+    color: App.$global-white;
+    border-color: App.$global-white;
+    border-top: 1px solid App.$global-white;
+
+    .options__text {
+      color: App.$global-white;
+    }
+
+    .error_open {
+      color: App.$global-red;
+    }
+
+    .line {
+      background-color: App.$global-white;
+    }
+  }
+
+  &_open {
+    display: flex;
+  }
+
+  &__text {
+    font-size: 10px;
+    color: App.$global-black;
+    display: flex;
+    margin-bottom: 10px;
+  }
 }
 
 .inputs {
   display: flex;
-justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 20px ;
-}
-
-.input {
-  width: 95px;
-  height: 45px;
-  border-radius: 8px;
-  background: #EFEFEF;
-  padding-left: 10px;
+  padding: 0 20px;
 }
 
 .line {
   width: 12px;
   height: 1px;
-  color: #000000;
-justify-content: center;
-  background-color: black;
-  margin: 0 10px
-}
-
-
-.option {
-  padding: 10px 22px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.option:hover {
-  background-color: black;
-  color: #FFFFFF;
-  transition: .6s ease-in-out;
-
-  position: initial;
+  background-color: App.$global-black;
+  margin: 0 10px;
 }
 
 .error {
-  font-size: 8px;
-  color: black;
+  font-size: 12px;
+  color: App.$global-red;
   display: none;
   margin-top: 5px;
-}
-.error_show {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  &_open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.text {
-  font-size: 10px;
-  color: black;
-  display: flex;
+@include Filters.container-screen-tab-1150;
+@include Filters.container-screen-tab-970;
+@include Filters.container-screen-tab-720;
+@include Filters.container-screen-mobile;
+
+@media screen and (max-width: App.$screen-tab-1150) {
+  .inputs {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .options {
+    height: 200px;
+  }
+
+  .error {
+    padding: 5px 5px 0 5px;
+    text-align: center;
+  }
 }
