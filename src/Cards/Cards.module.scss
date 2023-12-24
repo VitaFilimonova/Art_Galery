@@ -18,7 +18,7 @@
     align-self: center;
     justify-self: center;
 
-    @include font
+    @include font;
   }
 
   &__results_dark {
@@ -60,7 +60,6 @@ img {
 
   .card {
     width: 360px;
-
   }
 }
 

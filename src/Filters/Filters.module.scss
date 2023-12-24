@@ -32,7 +32,7 @@
   }
 }
 
-@media screen and (max-width: App.$screen-tab-970)  {
+@media screen and (max-width: App.$screen-tab-970) {
   .filters {
     //display: grid;
     //grid-template-columns: 1fr 1fr;
@@ -47,7 +47,7 @@
   }
 }
 
-@media screen and (max-width: App.$screen-tab-720)  {
+@media screen and (max-width: App.$screen-tab-720) {
   .filters {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -63,13 +63,13 @@
 @media screen and (max-width: App.$screen-mobile) {
   .filters {
     display: grid;
-    grid-template-columns: 1fr ;
+    grid-template-columns: 1fr;
     grid-row-gap: 15px;
     margin-bottom: 45px;
     max-width: 280px;
   }
 
-   .filter {
+  .filter {
     margin-bottom: 15px;
   }
 }
@@ -81,7 +81,6 @@
     }
   }
 }
-
 
 @mixin container-screen-tab-970 {
   @media screen and (max-width: App.$screen-tab-970) {
@@ -106,5 +105,3 @@
     }
   }
 }
-
-

@@ -4,7 +4,6 @@
 @use "src/Filters/Filters.module";
 @forward "./../Filters/Filters.module";
 
-
 .container {
   @include Filters.filter;
   position: relative;
@@ -31,7 +30,7 @@
   overflow-y: auto;
   left: -1px;
   z-index: 2;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 0 0 8px 8px;
   border: 1px solid #000;
   border-top: 0 transparent;
@@ -79,9 +78,8 @@
   width: 12px;
   height: 1px;
   background-color: App.$global-black;
-  margin: 0 10px
+  margin: 0 10px;
 }
-
 
 .error {
   font-size: 12px;
@@ -104,7 +102,7 @@
 
 @media screen and (max-width: App.$screen-tab-1150) {
   .inputs {
-   flex-direction: column;
+    flex-direction: column;
     gap: 15px;
   }
 
@@ -113,7 +111,7 @@
   }
 
   .error {
-    padding: 5px  5px 0 5px;
+    padding: 5px 5px 0 5px;
     text-align: center;
   }
 }

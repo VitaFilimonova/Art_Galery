@@ -34,7 +34,7 @@
   background-color: App.$global-white;
   border-radius: 0 0 8px 8px;
   border: 1px solid App.$global-black;
-  border-top: 1px solid rgba(App.$global-black, 0.30);
+  border-top: 1px solid rgba(App.$global-black, 0.3);
 
   top: calc(100%);
   left: -1px;
@@ -49,7 +49,6 @@
   &_dark {
     border: 1px solid App.$global-white;
     background-color: App.$global-black;
-
   }
 
   &::-webkit-scrollbar {
@@ -57,11 +56,10 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #7B7B7B;
+    background: #7b7b7b;
     border-radius: 10px;
   }
 }
-
 
 .option {
   align-items: center;
@@ -75,7 +73,7 @@
   &:hover {
     background-color: App.$global-black;
     color: App.$global-white;
-    transition: .6s ease-in-out;
+    transition: 0.6s ease-in-out;
   }
 
   &_dark {
@@ -85,11 +83,10 @@
     &:hover {
       background-color: App.$global-white;
       color: App.$global-black;
-      transition: .6s ease-in-out;
+      transition: 0.6s ease-in-out;
     }
   }
 }
-
 
 @include Filters.container-screen-tab-1150;
 @include Filters.container-screen-tab-970;

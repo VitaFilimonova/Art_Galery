@@ -42,6 +42,8 @@
 
   &:hover {
     transform: translateY(-120px);
-    transition: 1s linear, 1s ease-in-out;
+    transition:
+      1s linear,
+      1s ease-in-out;
   }
 }

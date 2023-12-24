@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 $global-white: #ffffff;
 $global-grey: #ededed;
@@ -22,7 +22,7 @@ body {
 }
 
 .App {
-    margin: 0 auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   //align-items: center;
@@ -38,13 +38,13 @@ body {
 }
 @media screen and (max-width: $screen-tab-970) {
   .App {
-   width: 700px;
+    width: 700px;
   }
 }
 
 @media screen and (max-width: $screen-tab-720) {
   .App {
-   width: 550px;
+    width: 550px;
   }
 }
 
@@ -53,6 +53,3 @@ body {
     width: 280px;
   }
 }
-
-
-

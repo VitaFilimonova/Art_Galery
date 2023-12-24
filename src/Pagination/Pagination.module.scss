@@ -13,7 +13,7 @@
   background: App.$global-white;
 
   &:hover {
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
     background: App.$global-grey;
   }
 
@@ -37,4 +37,3 @@
   background-color: App.$global-white;
   color: App.$global-black;
 }
-
