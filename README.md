@@ -15,7 +15,7 @@ This project is simple realisation an art gallery. HHere you can see paintings b
 ## Technologies
 Project is created with:
 * React
-* Redux
+* Redux Toolkit
 * RTK Query
 * TypeScript
 * SCSS
