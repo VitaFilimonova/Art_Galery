@@ -8,7 +8,7 @@ Art Gallery
 * [Usage](#usage)
 
 ## General info
-This project is simple realisation an art gallery. HHere you can see paintings by famous artists and short descriptions of them. Also you can filter paintings by name, author, location or year of creating. There are two theme modes: dark and light. The project can be adapted to different screen sizes. You can check the project using the link to GitHub Pages.
+This project is simple realisation an art gallery. Here you can see paintings by famous artists and short descriptions of them. Also you can filter paintings by name, author, location or year of creating. There are two theme modes: dark and light. The project can be adapted to different screen sizes. You can check the project using the link to GitHub Pages.
 ![image](https://github.com/VitaFilimonova/Art_Galery/assets/114240442/4831060f-2a77-400d-8f26-1c7b9d5ed505)
 
 	
